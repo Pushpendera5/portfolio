@@ -8,11 +8,11 @@ app.secret_key = 'pushpendra_portfolio_key'
 # Flask-Mail Configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'testingpushpendra@gmail.com' # Apna Gmail yahan likhein
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')    # Apna 16-digit App Password yahan likhein
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = 'testingpushpendra@gmail.com' 
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')    
 
-# YEH LINE ZAROORI HAI:
+
 app.config['MAIL_DEFAULT_SENDER'] = 'testingpushpendra@gmail.com' 
 
 mail = Mail(app)
@@ -25,7 +25,7 @@ def send_message():
     message_body = request.form.get('message')
 
     # 2. Create the Email Message
-    # We send it TO your testing email FROM the form user
+   
     msg = Message(
         subject=f"Portfolio: {subject}",
         sender=app.config['MAIL_USERNAME'],
@@ -51,7 +51,7 @@ def index():
 
 @app.route('/download-resume')
 def download_resume():
-    # Yeh line system ka absolute path nikal legi
+    
     resume_path = os.path.join(app.root_path, 'static')
     
     try:
@@ -63,11 +63,11 @@ def download_resume():
     except FileNotFoundError:
         return "Error: File 'resume.pdf' not found in static folder!", 404
 
-    # Message object mein 'sender' parameter add kar diya hai taaki error na aaye
+    
     msg = Message(
         subject=f"Portfolio Contact: {subject}",
-        sender=app.config['MAIL_USERNAME'], # Explicitly defining sender
-        recipients=['sachanpushpendra03@gmai.com'], # Jahan aapko mail chahiye
+        sender=app.config['MAIL_USERNAME'], 
+        recipients=['sachanpushpendra03@gmai.com'], 
         body=f"new chutiya send you a massage malik check kro isko:\n\nName: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
     )
 
@@ -75,7 +75,7 @@ def download_resume():
         mail.send(msg)
         flash("Success! Your message has been sent.", "success")
     except Exception as e:
-        # Debugging ke liye pura error dikhayega
+        
         flash(f"Error: {str(e)}", "error")
     
     return redirect(url_for('index'))
