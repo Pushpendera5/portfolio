@@ -10,7 +10,7 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'testingpushpendra@gmail.com' # Apna Gmail yahan likhein
-app.config['MAIL_PASSWORD'] = 'xmvp frry iqwv ocqa'    # Apna 16-digit App Password yahan likhein
+app.config['MAIL_PASSWORD'] = os.envirn.get('MAIL_PASSWORD')    # Apna 16-digit App Password yahan likhein
 
 # YEH LINE ZAROORI HAI:
 app.config['MAIL_DEFAULT_SENDER'] = 'testingpushpendra@gmail.com' 
@@ -59,4 +59,5 @@ def download_resume():
     
     return redirect(url_for('index'))
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT",5000))
+    app.run(host='0.0.0.0',port=port)
