@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PUSHPENDRA's Portfolio | MCA Student</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary1":"#ff3366",
+                        "primary2":"#2DF0AC",
+                        "primary": "#D13CE2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0f1623",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-pattern {
+            background-color: #0f1623;
+            background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        .glass-nav {
+            background: rgba(15, 22, 35, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
+<!-- Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 glass-nav">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">neurology</span>
+</div>
+<span class="text-xl font-bold tracking-tight">PUSHPENDRA's PORTFOLIO</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#about">About</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#education">Education</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#skills">Skills</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#experience">Experience</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#projects">Projects</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#Certificate">Certificate</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#contact">Contact</a>
+<a href="/download-resume"
+   class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all transform hover:scale-105">
+    Resume
+</a>
+
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</nav>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div id="flash-msg" class="mb-6 p-4 rounded-xl text-center font-bold {% if category == 'success' %}bg-green-500/20 text-green-400 border border-green-500/50{% else %}bg-red-500/20 text-red-400 border border-red-500/50{% endif %}">
+        {{ message }}
+      </div>
+      
+      <script>
+        setTimeout(function() {
+            window.location.href = "/";
+        }, 3000);
+      </script>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="max-w-md mx-auto">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div id="status-alert" class="flex items-center gap-3 p-4 mb-4 rounded-xl border animate-bounce
+          {% if category == 'success' %}
+            bg-emerald-500/10 border-emerald-500/50 text-emerald-400
+          {% else %}
+            bg-rose-500/10 border-rose-500/50 text-rose-400
+          {% endif %}">
+          
+          <span class="material-symbols-outlined">
+            {% if category == 'success' %}check_circle{% else %}error{% endif %}
+          </span>
+          <p class="font-bold text-sm">{{ message }}</p>
+        </div>
+
+        <script>
+          setTimeout(function() {
+              window.location.href = "/";
+          }, 3000);
+        </script>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+<form action="/send_message" method="POST" ...>
+...
+</form>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-20 hero-pattern overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px]"></div>
+</div>
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+<div class="flex flex-col gap-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider w-fit">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                    Available for Internships &amp; Collaborations
+                </div>
+<h1 class="text-5xl md:text-7xl font-black leading-tight tracking-tight">
+                    Building <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary1 to-blue-900">Intelligent</span> Systems
+                </h1>
+<p class="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed">
+                    Master of Computer Applications student with a focus on Deep Learning and Computer Vision. Bridging complex academic theories with high-performance, real-world AI applications.
+                </p>
+<div class="flex flex-wrap gap-4">
+<a class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all flex items-center gap-2 shadow-lg shadow-primary/25" href="#projects">
+                        View My Projects
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+<a class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all border border-slate-700" href="#contact">
+                        Get in Touch
+                    </a>
+</div>
+</div>
+<div class="hidden lg:block relative">
+<div class="aspect-square bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl border border-slate-700 overflow-hidden relative shadow-2xl">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[200px] text-primary/10">terminal</span>
+</div>
+<img class="w-full h-full object-cover  " data-alt="Abstract neural network visualization and blue light" src=static\ai3.png/>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-24 bg-white dark:bg-background-dark" id="about">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<div class="lg:col-span-5">
+<h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+<span class="w-8 h-1 bg-primary inline-block"></span>
+                        About Me
+                    </h2>
+<p class="text-slate-400 text-lg leading-relaxed mb-6">
+                        I am currently pursuing my Master of Computer Applications (MCA), where I've dedicated my research to the intersection of big data and neural architecture. My journey started with a fascination for how machines can learn patterns from raw data, which evolved into a professional pursuit of AI and Machine Learning.
+                    </p>
+<p class="text-slate-400 text-lg leading-relaxed">
+                        Beyond the code, I am a constant learner, following the latest research papers in NLP and Computer Vision to stay at the cutting edge of the field. My goal is to develop ethical AI solutions that solve complex human problems.
+                    </p>
+</div>
+<div class="lg:col-span-7 grid grid-cols-2 gap-6">
+<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">school</span>
+<h3 class="font-bold text-xl mb-2">Education</h3>
+<p class="text-slate-400 text-sm">MCA Student specializing in AI/ML</p>
+</div>
+<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">code</span>
+<h3 class="font-bold text-xl mb-2">Development</h3>
+<p class="text-slate-400 text-sm">Full-stack capabilities with a focus on Python ecosystems.</p>
+</div>
+<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">database</span>
+<h3 class="font-bold text-xl mb-2">Data Science</h3>
+<p class="text-slate-400 text-sm">Experienced in statistical modeling and ETL pipelines.</p>
+</div>
+<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">rocket_launch</span>
+<h3 class="font-bold text-xl mb-2">Innovation</h3>
+<p class="text-slate-400 text-sm">Passionate about R&amp;D in Generative AI models.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Education Section -->
+<section class="py-24 bg-slate-50 dark:bg-slate-900/30" id="education">
+<div class="max-w-4xl mx-auto px-6">
+<h2 class="text-3xl font-bold mb-12 text-center">Academic Journey</h2>
+<div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 space-y-12">
+<div class="relative pl-10">
+<div class="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-primary border-4 border-background-dark"></div>
+<div>
+<span class="text-primary font-bold text-sm">2024 - Present</span>
+<h3 class="text-2xl font-bold mt-1">Master of Computer Applications (MCA)</h3>
+<p class="text-slate-500 font-medium">Specialization: Artificial Intelligence &amp; Machine Learning</p>
+<!--<p class="mt-4 text-slate-400">Relevant coursework: Deep Learning, Neural Networks, Statistical Modeling, Distributed Computing, and Big Data Architecture.</p>/-->
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-primary border-4 border-background-dark"></div>
+<div>
+<span class="text-primary font-bold text-sm">2019 - 2022</span>
+<h3 class="text-2xl font-bold mt-1">Bachelor of  Science</h3>
+<p class="text-slate-500 font-medium">Math</p>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-primary border-4 border-background-dark"></div>
+<div>
+<span class="text-primary font-bold text-sm">2015</span>
+<h3 class="text-2xl font-bold mt-1">Intermediate</h3>
+<p class="text-slate-500 font-medium">State Board <br> School Name : Vikas Vidhya mandir inter collage </p>
+</p>
+</div>
+</div><div class="relative pl-10">
+<div class="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-primary border-4 border-background-dark"></div>
+<div>
+<span class="text-primary font-bold text-sm">2013</span>
+<h3 class="text-2xl font-bold mt-1">Secondry Education </h3>
+<p class="text-slate-500 font-medium">State Board <br> School Name : Vikas Vidhya mandir inter collage </p>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<!--Technical Stack-->
+<section class="py-24 bg-slate-50 dark:bg-slate-900/30" id="skills">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">Technical Stack</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">Specialized in building end-to-end intelligent applications.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <h3 class="text-primary font-bold flex items-center gap-2 px-2">
+                    <span class="material-symbols-outlined text-xl">code</span> Frontend
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">JavaScript</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">HTML5 / CSS3</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Tailwind CSS</div>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-primary font-bold flex items-center gap-2 px-2">
+                    <span class="material-symbols-outlined text-xl">dns</span> Backend
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Flask</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Django</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Fast API</div>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-primary font-bold flex items-center gap-2 px-2">
+                    <span class="material-symbols-outlined text-xl">database</span> Data & Cloud
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">SQL</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Pandas</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Numpy</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">AWS Sagemaker</div>
+                </div>
+            </div>
+
+            
+            <div class="space-y-4">
+                <h3 class="text-primary font-bold flex items-center gap-2 px-2">
+                    <span class="material-symbols-outlined text-xl">psychology</span> AI & Machine Learning
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Python</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">TensorFlow</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Keras</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Scikit-learn</div>
+                    <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">OpenCV</div>
+                </div>
+            </div>
+            <div class="space-y-4">
+    <h3 class="text-primary font-bold flex items-center gap-2 px-2">
+        <span class="material-symbols-outlined text-xl">lan</span> Infrastructure & Networking
+    </h3>
+    <div class="flex flex-wrap gap-2">
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Active Directory</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">TCP/IP & HTTP/S</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Firewall & VPN</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">DNS/DHCP</div> 
+    </div>
+</div>
+
+<div class="space-y-2">
+    <h3 class="text-primary font-bold flex items-center gap-2 px-2">
+        <span class="material-symbols-outlined text-xl">settings_suggest</span> Systems & Deployment
+    </h3>
+    <div class="flex flex-wrap gap-3">
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">Windows Server</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">SCCM & Patching</div>
+
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">PowerShell</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">IIS Management</div>
+        
+    </div>
+</div>
+
+<!--<div class="space-y-4">
+    <h3 class="text-primary font-bold flex items-center gap-2 px-2">
+        <span class="material-symbols-outlined text-xl">cloud_done</span> Virtualization & Special Tech
+    </h3>
+    <div class="flex flex-wrap gap-3">
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">VMware & Hyper-V</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">AWS EC2 / Azure</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">RFID Systems</div>
+        <div class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-sm font-semibold hover:border-primary/50 transition-colors">CCTV & Access Control</div>
+    </div>
+</div> -->
+
+            
+            
+            
+
+
+        </div>
+    </div>
+</section>
+
+<!--Experience section-->
+<section class="py-24 bg-white dark:bg-background-dark" id="experience">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+<span class="w-8 h-1 bg-primary inline-block"></span>
+            Work Experience
+        </h2>
+<div class="space-y-8">
+<!-- Experience Entry 1 -->
+ <div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 transition-all">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold">Technical Support Engineer</h3>
+            <p class="text-primary font-semibold">WAYINFOTECH SOLUTIONS |  Noida Sector 62</p>
+        </div>
+        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
+            4 Fabruary 2026 to Present
+        </div>
+    </div>
+    <ul class="space-y-3 text-slate-400 text-lg">
+        <li class="flex gap-3">
+            <span class="text-primary mt-1.5 material-symbols-outlined text-sm">fiber_manual_record</span>
+            <span>Implemented and monitored virtualized environments using VMware and Hyper-V, optimizing server performance and hardware efficiency.</span>
+        </li>
+        <li class="flex gap-3">
+            <span class="text-primary mt-1.5 material-symbols-outlined text-sm">fiber_manual_record</span>
+            <span>Managed IIS application deployment and handled professional IT service workflows through ServiceNow (ITSM) platforms..</span>
+        </li>
+        <li class="flex gap-3">
+            <span class="text-primary mt-1.5 material-symbols-outlined text-sm">fiber_manual_record</span>
+            <span>Configured and maintained Active Directory services and TCP/IP networking protocols to ensure secure and stable user management and connectivity.</span>
+        </li>
+    </ul>
+</div>
+<div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 transition-all">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold">Technical Support Engineer</h3>
+            <p class="text-primary font-semibold">POXO RFID AUTOMATION | Janakpuri, East Delhi</p>
+        </div>
+        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
+            October 2023 - 10 october 2025
+        </div>
+    </div>
+    <ul class="space-y-3 text-slate-400 text-lg">
+        <li class="flex gap-3">
+            <span class="text-primary mt-1.5 material-symbols-outlined text-sm">fiber_manual_record</span>
+            <span>Engineered and deployed RFID automation systems for real-time tracking and hardware-software integration, enhancing operational transparency."</span>
+        </li>
+        <li class="flex gap-3">
+            <span class="text-primary mt-1.5 material-symbols-outlined text-sm">fiber_manual_record</span>
+            <span>Developed and hosted high-performance REST APIs using Postman for rigorous testing and documentation, ensuring seamless endpoint connectivity..</span>
+        </li>
+        <li class="flex gap-3">
+            <span class="text-primary mt-1.5 material-symbols-outlined text-sm">fiber_manual_record</span>
+            <span>Architected and optimized complex MS SQL databases, including writing advanced queries and managing relational data for scalable applications</span>
+        </li>
+         <li class="flex gap-3">
+            <span class="text-primary mt-1.5 material-symbols-outlined text-sm">fiber_manual_record</span>
+            <span>Designed and managed secure TCP/IP networks, implementing Firewall, VPN, and DNS configurations to maintain high availability and data security.</span>
+        </li>
+
+    </ul>
+</div>
+</div>
+</section>
+
+<!-- Featured Projects -->
+<section class="py-24" id="projects">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex items-end justify-between mb-16">
+<div>
+<h2 class="text-3xl font-bold mb-4">Featured Projects</h2>
+<p class="text-slate-400">Selected academic and personal projects in AI &amp; Machine Learning.</p>
+</div>
+<a class="text-primary font-bold flex items-center gap-2 hover:underline" href="#">
+                    View all projects
+                    <span class="material-symbols-outlined text-sm">north_east</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project 1 -->
+<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Blue and black tech interface for NLP analysis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBusqtoRDl5OS2iv7Fujqaz4SrLlJmVcU8KszU76c8p68Maqo7iU9p8Wg3VHwTCXjYSha_TArey2ROKVpFuMAb1tCSlwvfl1bsjQ3KfyEMUnDM_YVMk49-s3XN1-rcghxNdPsHZOIysKf82r_Ok12ryxFb8JrJl2MvSaXpcqw2J4DBwX1ldt9kxUKZiWzZ37t1xUAsVJBY0kqhlC0TbpSEZZrLRZHVPgaeoTx-kYQy5dlYn8YKnGwkVNPvbPJN_FG5ZzvFcC398Mhnw"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">NLP</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Python</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Transformers</span>
+</div>
+<h3 class="text-xl font-bold mb-3">NLP Sentiment Analysis</h3>
+<p class="text-slate-400 text-sm mb-6 flex-1">
+                            An advanced text classification engine using BERT architectures to analyze sentiment across 1M+ customer reviews with 94% accuracy.
+                        </p>
+<div class="flex items-center gap-4 text-slate-300">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">GitHub</span>
+</a>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">description</span>
+<span class="text-xs">Paper</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Futuristic security camera and identification nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNfPpSwkHP50PnqiMl3FpR51KaIBdONi9HVQnvd-Gcfow_A2o99CPKp9wzeZvaVuuSY5u7UyJhrWVkztExdTVwwuUON0aNLOam5WoOi_aycJEM002iguAvuIB342rmioHNYQzE5INM0s9ymc4UAP030GlZsoM53j6m5V2ZWGqVkGaBJAeDRXiDulpn2dEeX_Am4Fft9aPvvBc2AVhNE2LsF0oNdSKmgt0eHNzN68iCwmprfXhNVo_wn4iBPMxSG0pFuoKTwxLWWic7"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Computer Vision</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">YOLOv8</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PyTorch</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Object Detection for Security</h3>
+<p class="text-slate-400 text-sm mb-6 flex-1">
+                            Real-time multi-object detection system optimized for low-latency surveillance video feeds using custom trained YOLO models.
+                        </p>
+<div class="flex items-center gap-4 text-slate-300">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">GitHub</span>
+</a>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">videocam</span>
+<span class="text-xs">Demo</span>
+</a>
+</div>
+</div>
+</div>
+<!--Project 2-->
+<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Blue and black tech interface for NLP analysis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBusqtoRDl5OS2iv7Fujqaz4SrLlJmVcU8KszU76c8p68Maqo7iU9p8Wg3VHwTCXjYSha_TArey2ROKVpFuMAb1tCSlwvfl1bsjQ3KfyEMUnDM_YVMk49-s3XN1-rcghxNdPsHZOIysKf82r_Ok12ryxFb8JrJl2MvSaXpcqw2J4DBwX1ldt9kxUKZiWzZ37t1xUAsVJBY0kqhlC0TbpSEZZrLRZHVPgaeoTx-kYQy5dlYn8YKnGwkVNPvbPJN_FG5ZzvFcC398Mhnw"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">NLP</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Python</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Transformers</span>
+</div>
+<h3 class="text-xl font-bold mb-3">NLP Sentiment Analysis</h3>
+<p class="text-slate-400 text-sm mb-6 flex-1">
+                            An advanced text classification engine using BERT architectures to analyze sentiment across 1M+ customer reviews with 94% accuracy.
+                        </p>
+<div class="flex items-center gap-4 text-slate-300">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">GitHub</span>
+</a>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">description</span>
+<span class="text-xs">Paper</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Futuristic security camera and identification nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNfPpSwkHP50PnqiMl3FpR51KaIBdONi9HVQnvd-Gcfow_A2o99CPKp9wzeZvaVuuSY5u7UyJhrWVkztExdTVwwuUON0aNLOam5WoOi_aycJEM002iguAvuIB342rmioHNYQzE5INM0s9ymc4UAP030GlZsoM53j6m5V2ZWGqVkGaBJAeDRXiDulpn2dEeX_Am4Fft9aPvvBc2AVhNE2LsF0oNdSKmgt0eHNzN68iCwmprfXhNVo_wn4iBPMxSG0pFuoKTwxLWWic7"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Computer Vision</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">YOLOv8</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PyTorch</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Object Detection for Security</h3>
+<p class="text-slate-400 text-sm mb-6 flex-1">
+                            Real-time multi-object detection system optimized for low-latency surveillance video feeds using custom trained YOLO models.
+                        </p>
+<div class="flex items-center gap-4 text-slate-300">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">GitHub</span>
+</a>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">videocam</span>
+<span class="text-xs">Demo</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Blue and black tech interface for NLP analysis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBusqtoRDl5OS2iv7Fujqaz4SrLlJmVcU8KszU76c8p68Maqo7iU9p8Wg3VHwTCXjYSha_TArey2ROKVpFuMAb1tCSlwvfl1bsjQ3KfyEMUnDM_YVMk49-s3XN1-rcghxNdPsHZOIysKf82r_Ok12ryxFb8JrJl2MvSaXpcqw2J4DBwX1ldt9kxUKZiWzZ37t1xUAsVJBY0kqhlC0TbpSEZZrLRZHVPgaeoTx-kYQy5dlYn8YKnGwkVNPvbPJN_FG5ZzvFcC398Mhnw"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">NLP</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Python</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Transformers</span>
+</div>
+<h3 class="text-xl font-bold mb-3">NLP Sentiment Analysis</h3>
+<p class="text-slate-400 text-sm mb-6 flex-1">
+                            An advanced text classification engine using BERT architectures to analyze sentiment across 1M+ customer reviews with 94% accuracy.
+                        </p>
+<div class="flex items-center gap-4 text-slate-300">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">GitHub</span>
+</a>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">description</span>
+<span class="text-xs">Paper</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Project 4 -->
+<!--<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Futuristic security camera and identification nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNfPpSwkHP50PnqiMl3FpR51KaIBdONi9HVQnvd-Gcfow_A2o99CPKp9wzeZvaVuuSY5u7UyJhrWVkztExdTVwwuUON0aNLOam5WoOi_aycJEM002iguAvuIB342rmioHNYQzE5INM0s9ymc4UAP030GlZsoM53j6m5V2ZWGqVkGaBJAeDRXiDulpn2dEeX_Am4Fft9aPvvBc2AVhNE2LsF0oNdSKmgt0eHNzN68iCwmprfXhNVo_wn4iBPMxSG0pFuoKTwxLWWic7"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Computer Vision</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">YOLOv8</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PyTorch</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Object Detection for Security</h3>
+<p class="text-slate-400 text-sm mb-6 flex-1">
+                            Real-time multi-object detection system optimized for low-latency surveillance video feeds using custom trained YOLO models.
+                        </p>
+<div class="flex items-center gap-4 text-slate-300">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">GitHub</span>
+</a>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">videocam</span>
+<span class="text-xs">Demo</span>
+</a>
+</div>
+</div>
+</div>-->
+<!-- Project 5 -->
+<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Healthcare data chart and medical symbols" src="https://media.istockphoto.com/id/2154273691/photo/businessman-is-showing-concept-of-future-technology-and-internet-connection-network-with-ai.jpg?s=170667a&w=0&k=20&c=zWzoh3EjN71g5VgII5nSQuvGI2ZYKcFyK6WvvOyNScY="/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</div>
+</div>
+<div class="p-8 flex flex-col flex-1">
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Analytics</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Scikit-learn</span>
+<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PostgreSQL</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Predictive Health Analytics</h3>
+<p class="text-slate-400 text-sm mb-6 flex-1">
+                            A predictive model developed to identify patient risk factors for chronic diseases using longitudinal health record data.
+                        </p>
+<div class="flex items-center gap-4 text-slate-300">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">GitHub</span>
+</a>
+<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">bar_chart</span>
+<span class="text-xs">Dashboard</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!--Certificate section-->
+<section class="py-24 bg-white dark:bg-background-dark" id="Certificate">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+<span class="w-8 h-1 bg-primary inline-block"></span>
+            Certificate
+        </h2>
+<div class="space-y-8">
+<!-- Experience Entry 1 -->
+ <div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 transition-all">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold">Machine Learning Capstone <p class="text-primary text-xl font-semibold">IBM</p><a class="flex items-center gap-1 hover:text-primary transition-colors" href="https://www.coursera.org/account/accomplishments/records/CV1P862IYD84">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">Tap Here For credential CV1P862IYD84</span>
+</a></h3>
+            
+        </div>
+        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
+             Fabruary, 2026
+        </div>
+    </div>  
+
+</div>
+<div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 transition-all">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold">Research Methodologies<p class="text-primary text-xl font-semibold">Queen Mary University Of London</p><a class="flex items-center gap-1 hover:text-primary transition-colors" href="https://www.coursera.org/account/accomplishments/records/3GG3VBVMM2KB">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">Tap Here For credential 3GG3VBVMM2KB</span>
+</a></h3>
+            
+        </div>
+        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
+             Jan, 2026
+        </div>
+    </div>  
+
+</div><div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/40 transition-all">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+            <h3 class="text-2xl font-bold">SQL Foundations<p class="text-primary text-xl font-semibold">Microsoft</p><a class="flex items-center gap-1 hover:text-primary transition-colors" href="https://www.coursera.org/account/accomplishments/records/9AY59KZ134LZ">
+<span class="material-symbols-outlined text-lg">code</span>
+<span class="text-xs">Tap Here For credential 9AY59KZ134LZ</span>
+</a></h3>
+            
+        </div>
+        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
+             August 15, 2025
+        </div>
+    </div>  
+
+</div>
+
+<!-- Contact Section -->
+<section class="py-24" id="contact">
+<div class="max-w-7xl mx-auto px-6">
+<div class="bg-gradient-to-br from-slate-900 to-black rounded-3xl border border-slate-800 p-8 md:p-16 flex flex-col md:flex-row gap-16 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="flex-1 z-10">
+<h2 class="text-4xl font-bold mb-6">Let's build the future together.</h2>
+<p class="text-slate-400 text-lg mb-8 max-w-md">
+                        Currently looking for internship opportunities or collaborative AI research projects. If you're interested in my work, let's connect.
+                    </p>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-full bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Email Me</p>
+<p class="font-medium"><p class="font-medium hover:text-primary transition-colors">
+    <a href="mailto:Sachanpushpendra03@gmail.com">Sachanpushpendra03@gmail.com</a>
+</p></p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-full bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">share</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Follow Me</p>
+<div class="flex gap-4 mt-1">
+<a class="hover:text-primary transition-colors" href="#">GitHub</a>
+<a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 z-10">
+<form action="/send_message" method="POST" class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="space-y-2">
+            <label class="text-xs font-bold uppercase text-slate-400">Name</label>
+            <input name="name" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="e.g. Pushpendra Sachan" type="text" required/>
+        </div>
+        <div class="space-y-2">
+            <label class="text-xs font-bold uppercase text-slate-400">Email</label>
+            <input name="email" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="......@Email.com" type="email" required/>
+        </div>
+    </div>
+    <div class="space-y-2">
+        <label class="text-xs font-bold uppercase text-slate-400">Subject</label>
+        <input name="subject" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="Opportunity for Collaboration" type="text" required/>
+    </div>
+    <div class="space-y-2">
+        <label class="text-xs font-bold uppercase text-slate-400">Message</label>
+        <textarea name="message" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="How can I help you?" rows="4" required></textarea>
+    </div>
+    <button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-all" type="submit">
+        Send Message
+    </button>
+</form>
+
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="py-12 border-t border-slate-800 bg-background-dark">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">neurology</span>
+</div>
+<span class="font-bold"></span>
+</div>
+<p class="text-slate-300 text-sm">
+                © 2026 Designed and Built by Pushpendra Sachan.
+            </p>
+<div class="flex items-center gap-6">
+<a class="text-slate-500 hover:text-primary transition-colors font-medium" href="#"></a>
+<a class="text-slate-500 hover:text-primary transition-colors font-medium" href="#"></a>
+</div>
+</div>
+</footer>
+</body></html>
