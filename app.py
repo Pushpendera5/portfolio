@@ -16,17 +16,38 @@ app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')    # Apna 16-digit
 app.config['MAIL_DEFAULT_SENDER'] = 'testingpushpendra@gmail.com' 
 
 mail = Mail(app)
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    # 1. Capture the form data
+    name = request.form.get('name')
+    email = request.form.get('email')
+    subject = request.form.get('subject')
+    message_body = request.form.get('message')
+
+    # 2. Create the Email Message
+    # We send it TO your testing email FROM the form user
+    msg = Message(
+        subject=f"Portfolio: {subject}",
+        sender=app.config['MAIL_USERNAME'],
+        recipients=['testingpushpendra@gmail.com'], # Where you want to RECEIVE the mail
+        body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
+    )
+
+    try:
+        # 3. Attempt to send
+        mail.send(msg)
+        # 4. Redirect back to home so the user doesn't see a blank error page
+        return redirect(url_for('index')) 
+    
+    except Exception as e:
+        # If SMTP fails (wrong password, etc.), this prints to Render logs
+        print(f"Mail Error: {e}")
+        return f"Error sending message: {e}", 500
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/send_message', methods=['POST'])
-def send_message():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    subject = request.form.get('subject')
-    message_body = request.form.get('message')    
 
 @app.route('/download-resume')
 def download_resume():
