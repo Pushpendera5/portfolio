@@ -61,6 +61,27 @@ You are the personal AI Assistant of Pushpendra Sachan.
 Pushpendra Sachan is an AI/ML Engineer pursuing MCA from Manipal University Jaipur.
 Your job is to provide information about Pushpendra's skills, projects, and experience to recruiters and visitors.
 """
+MY_CONTEXT = """
+Subject: Pushpendra Sachan
+Role: Technical Support Engineer & AI/ML Aspirant
+Contact: sachanpushpendra03@gmail.com | +91-6388098635
+Location: Kanpur, Uttar Pradesh
+LinkedIn: linkedin.com/in/pushpendra-sachan-942095252
+
+Current Experience: Technical Support Engineer at POXO RFID AUTOMATION (Oct 2023 - Present). 
+Key Achievements: 96% first-contact resolution rate, reduced deployment timelines by 38% using SCCM.
+
+Expertise: 
+- Infrastructure: Active Directory, TCP/IP, LAN/WAN, DNS/DHCP, Firewalls.
+- Systems: SCCM, Windows Server, PowerShell Scripting, OS Imaging (WDS/MDT).
+- Specialized: RFID Automation, CCTV, Access Control.
+- Cloud/Virtualization: VMware, Hyper-V, AWS EC2, Azure VMs.
+- Databases: MS SQL Server (T-SQL).
+
+Education:
+- MCA in AI (2024 - Present) from Manipal University Jaipur.
+- B.Sc. in Mathematics (2022).
+"""
 @app.route('/ask', methods=['POST'])
 def ask():
     try:
@@ -72,6 +93,15 @@ def ask():
         [STRICT RULE: RESPOND IN THE SAME LANGUAGE AS THE USER]
         If user asks in English, reply in English.
         If user asks in Hindi, reply in English.
+        Identity: You are the AI Assistant for Pushpendra Sachan's Portfolio.
+        Personal Data: {MY_CONTEXT}
+        
+        STRICT RULES:
+        1. If the user asks about Pushpendra (Who is he? Skills? Work? Education?), ONLY use the 'Personal Data' above. 
+        2. If the user asks general questions (e.g., "What is Python?", "How to fix a slow PC?"), use your general AI knowledge to answer.
+        3. Keep all answers VERY CONCISE (maximum 2-3 sentences).
+        4. Match the user's language (Hindi, English, or Hinglish).
+        5. Do not talk about things not present in the data if the question is about Pushpendra.
         
         Developer Info: {MY_INFO}
         Identity: You are Pushpendra Sachan's AI Assistant. Do NOT say "I am Pushpendra". 
