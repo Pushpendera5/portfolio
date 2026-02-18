@@ -79,6 +79,7 @@
 </div>
 </div>
 </nav>
+
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
@@ -786,7 +787,7 @@
 <div class="bg-brand-blue p-4 flex items-center justify-between text-white">
 <div class="flex items-center gap-2">
 <div class="w-8 h-2 bg-green-400 rounded-full animate-pulse"></div>
-<span class="font-semibold">AI Assistant</span>
+<span class="font-semibold"> PUSHPENDRA'S AI Assistant</span>
 </div>
 <button class="hover:bg-blue-600 rounded p-1 transition-colors" id="close-chat">
 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -984,6 +985,22 @@ document.getElementById('chat-input').addEventListener('keypress', function (e) 
     if (e.key === 'Enter') {
         handleSend();
     }
+});
+// Mobile Menu Toggle Logic
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+menuToggle.addEventListener('click', () => {
+    // Ye 'hidden' class ko hata dega ya laga dega
+    mobileMenu.classList.toggle('hidden');
+});
+
+// Menu link click karne par menu apne aap band ho jaye
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+    });
 });
 
   </script>
