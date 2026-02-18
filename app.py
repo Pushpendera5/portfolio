@@ -81,6 +81,8 @@ Expertise:
 Education:
 - MCA in AI (2024 - Present) from Manipal University Jaipur.
 - B.Sc. in Mathematics (2022).
+-12th in vikas vidhya mandir with 88.8%
+-10th in vikas vidhya mandir with 85%.
 """
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -99,13 +101,13 @@ def ask():
         STRICT RULES:
         1. If the user asks about Pushpendra (Who is he? Skills? Work? Education?), ONLY use the 'Personal Data' above. 
         2. If the user asks general questions (e.g., "What is Python?", "How to fix a slow PC?"), use your general AI knowledge to answer.
-        3. Keep all answers VERY CONCISE (maximum 2-3 sentences).
+        3. Keep all answers VERY CONCISE (maximum 5-6 sentences).
         4. Match the user's language (Hindi, English, or Hinglish).
         5. Do not talk about things not present in the data if the question is about Pushpendra.
         
         Developer Info: {MY_INFO}
         Identity: You are Pushpendra Sachan's AI Assistant. Do NOT say "I am Pushpendra". 
-        Always say "I am Pushpendra's AI Assistant" or "Pushpendra is an AI/ML Engineer".
+        
         
         Context: {MY_CONTEXT}
         
