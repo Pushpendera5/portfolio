@@ -77,6 +77,41 @@ def _send_via_resend(subject, text_body, reply_to=None):
     except urlerror.URLError as exc:
         raise RuntimeError(f"Resend API network error: {exc.reason}") from exc
 
+
+def _send_via_formsubmit(name, email, subject, message_body):
+    recipient = (CONTACT_RECIPIENT or "").strip()
+    if not recipient:
+        raise ValueError("Missing CONTACT_RECIPIENT for FormSubmit fallback")
+
+    payload = {
+        "name": name or "Website Visitor",
+        "email": email or "not-provided@example.com",
+        "subject": subject or "Portfolio Contact: No Subject",
+        "message": message_body or "No message body",
+        "_captcha": "false",
+        "_template": "table",
+    }
+
+    req = urlrequest.Request(
+        f"https://formsubmit.co/ajax/{recipient}",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+
+    timeout_seconds = float(os.environ.get("FORMSUBMIT_TIMEOUT", "10"))
+    try:
+        with urlrequest.urlopen(req, timeout=timeout_seconds) as response:
+            body = response.read().decode("utf-8", "replace")
+            data = json.loads(body) if body else {}
+            if not data.get("success"):
+                raise RuntimeError(f"FormSubmit response: {body}")
+    except urlerror.HTTPError as exc:
+        error_body = exc.read().decode("utf-8", "replace")
+        raise RuntimeError(f"FormSubmit error {exc.code}: {error_body}") from exc
+    except urlerror.URLError as exc:
+        raise RuntimeError(f"FormSubmit network error: {exc.reason}") from exc
+
 # --- AI CONFIGURATION ---
 key = os.environ.get("BYTEZ_KEY", "3f111f6b8edb9dbf37694dbceab79386")
 sdk = Bytez(key)
@@ -222,15 +257,27 @@ def send_message():
         )
 
         provider = os.environ.get("MAIL_PROVIDER", "auto").strip().lower()
+        formsubmit_enabled = _get_bool_env("FORMSUBMIT_ENABLE", True)
         use_resend = provider == "resend" or (
             provider == "auto" and bool(os.environ.get("RESEND_API_KEY"))
         )
+        use_formsubmit_only = provider == "formsubmit"
 
         if use_resend:
             _send_via_resend(
                 subject=final_subject,
                 text_body=final_body,
                 reply_to=email if email else None,
+            )
+            _safe_flash("Success! Your message has been sent.", "success")
+            return redirect(url_for("index"))
+
+        if use_formsubmit_only:
+            _send_via_formsubmit(
+                name=name,
+                email=email,
+                subject=final_subject,
+                message_body=final_body,
             )
             _safe_flash("Success! Your message has been sent.", "success")
             return redirect(url_for("index"))
@@ -244,6 +291,15 @@ def send_message():
         }
         missing = [key for key, value in required_config.items() if not value]
         if missing:
+            if provider == "auto" and formsubmit_enabled:
+                _send_via_formsubmit(
+                    name=name,
+                    email=email,
+                    subject=final_subject,
+                    message_body=final_body,
+                )
+                _safe_flash("Success! Your message has been sent via backup service.", "success")
+                return redirect(url_for("index"))
             _safe_flash(
                 f"SMTP is not configured on server. Missing: {', '.join(missing)}.",
                 "error",
@@ -259,6 +315,15 @@ def send_message():
                 timeout_seconds=preflight_timeout,
             )
             if not reachable:
+                if provider == "auto" and formsubmit_enabled:
+                    _send_via_formsubmit(
+                        name=name,
+                        email=email,
+                        subject=final_subject,
+                        message_body=final_body,
+                    )
+                    _safe_flash("Success! Your message has been sent via backup service.", "success")
+                    return redirect(url_for("index"))
                 _safe_flash(
                     "SMTP server is unreachable from this host. "
                     "On Render free web services, outbound SMTP ports are blocked.",
@@ -284,6 +349,23 @@ def send_message():
         _safe_flash("Success! Your message has been sent.", "success")
     except (socket.timeout, TimeoutError):
         app.logger.exception("Contact form email timed out")
+        if _get_bool_env("FORMSUBMIT_ENABLE", True):
+            try:
+                _send_via_formsubmit(
+                    name=(request.form.get("name") or "").strip(),
+                    email=(request.form.get("email") or "").strip(),
+                    subject=f"Portfolio Contact: {(request.form.get('subject') or '').strip() or 'No Subject'}",
+                    message_body=(
+                        "Owner, you have a new message!\n\n"
+                        f"Name: {(request.form.get('name') or '').strip() or 'Not provided'}\n"
+                        f"Email: {(request.form.get('email') or '').strip() or 'Not provided'}\n\n"
+                        f"Message:\n{(request.form.get('message') or '').strip() or 'No message body'}"
+                    ),
+                )
+                _safe_flash("Success! Your message has been sent via backup service.", "success")
+                return redirect(url_for("index"))
+            except Exception:
+                app.logger.exception("FormSubmit fallback failed after timeout")
         _safe_flash(
             "Email service timeout from server. On Render free plan, SMTP ports are blocked. "
             "Use a paid instance or an email API provider (Resend/SendGrid/Brevo API).",
@@ -291,6 +373,23 @@ def send_message():
         )
     except smtplib.SMTPException as e:
         app.logger.exception("Contact form SMTP error")
+        if _get_bool_env("FORMSUBMIT_ENABLE", True):
+            try:
+                _send_via_formsubmit(
+                    name=(request.form.get("name") or "").strip(),
+                    email=(request.form.get("email") or "").strip(),
+                    subject=f"Portfolio Contact: {(request.form.get('subject') or '').strip() or 'No Subject'}",
+                    message_body=(
+                        "Owner, you have a new message!\n\n"
+                        f"Name: {(request.form.get('name') or '').strip() or 'Not provided'}\n"
+                        f"Email: {(request.form.get('email') or '').strip() or 'Not provided'}\n\n"
+                        f"Message:\n{(request.form.get('message') or '').strip() or 'No message body'}"
+                    ),
+                )
+                _safe_flash("Success! Your message has been sent via backup service.", "success")
+                return redirect(url_for("index"))
+            except Exception:
+                app.logger.exception("FormSubmit fallback failed after SMTP error")
         _safe_flash(f"SMTP error: {str(e)}", "error")
     except Exception as e:
         app.logger.exception("Contact form email failed")
