@@ -21,7 +21,11 @@ def _get_bool_env(name, default=False):
 
 def _safe_flash(message, category="message"):
     try:
-        flash(message, category)
+        text = str(message)
+        max_len = 300
+        if len(text) > max_len:
+            text = text[: max_len - 3] + "..."
+        flash(text, category)
     except Exception:
         app.logger.exception("Failed to write flash message")
 
@@ -73,7 +77,8 @@ def _send_via_resend(subject, text_body, reply_to=None):
             response.read()
     except urlerror.HTTPError as exc:
         error_body = exc.read().decode("utf-8", "replace")
-        raise RuntimeError(f"Resend API error {exc.code}: {error_body}") from exc
+        snippet = error_body[:200].replace("\n", " ").strip()
+        raise RuntimeError(f"Resend API error {exc.code}: {snippet}") from exc
     except urlerror.URLError as exc:
         raise RuntimeError(f"Resend API network error: {exc.reason}") from exc
 
@@ -107,8 +112,7 @@ def _send_via_formsubmit(name, email, subject, message_body):
             if not data.get("success"):
                 raise RuntimeError(f"FormSubmit response: {body}")
     except urlerror.HTTPError as exc:
-        error_body = exc.read().decode("utf-8", "replace")
-        raise RuntimeError(f"FormSubmit error {exc.code}: {error_body}") from exc
+        raise RuntimeError(f"FormSubmit error {exc.code}") from exc
     except urlerror.URLError as exc:
         raise RuntimeError(f"FormSubmit network error: {exc.reason}") from exc
 
@@ -257,7 +261,7 @@ def send_message():
         )
 
         provider = os.environ.get("MAIL_PROVIDER", "auto").strip().lower()
-        formsubmit_enabled = _get_bool_env("FORMSUBMIT_ENABLE", True)
+        formsubmit_enabled = _get_bool_env("FORMSUBMIT_ENABLE", False)
         use_resend = provider == "resend" or (
             provider == "auto" and bool(os.environ.get("RESEND_API_KEY"))
         )
@@ -349,7 +353,7 @@ def send_message():
         _safe_flash("Success! Your message has been sent.", "success")
     except (socket.timeout, TimeoutError):
         app.logger.exception("Contact form email timed out")
-        if _get_bool_env("FORMSUBMIT_ENABLE", True):
+        if _get_bool_env("FORMSUBMIT_ENABLE", False):
             try:
                 _send_via_formsubmit(
                     name=(request.form.get("name") or "").strip(),
@@ -367,13 +371,12 @@ def send_message():
             except Exception:
                 app.logger.exception("FormSubmit fallback failed after timeout")
         _safe_flash(
-            "Email service timeout from server. On Render free plan, SMTP ports are blocked. "
-            "Use a paid instance or an email API provider (Resend/SendGrid/Brevo API).",
+            "Email service timed out. Configure Resend on Render: MAIL_PROVIDER=resend, RESEND_API_KEY, RESEND_FROM, CONTACT_RECIPIENT.",
             "error",
         )
     except smtplib.SMTPException as e:
         app.logger.exception("Contact form SMTP error")
-        if _get_bool_env("FORMSUBMIT_ENABLE", True):
+        if _get_bool_env("FORMSUBMIT_ENABLE", False):
             try:
                 _send_via_formsubmit(
                     name=(request.form.get("name") or "").strip(),
@@ -390,10 +393,16 @@ def send_message():
                 return redirect(url_for("index"))
             except Exception:
                 app.logger.exception("FormSubmit fallback failed after SMTP error")
-        _safe_flash(f"SMTP error: {str(e)}", "error")
+        _safe_flash(
+            "SMTP is unavailable on this host. Configure Resend API for delivery.",
+            "error",
+        )
     except Exception as e:
         app.logger.exception("Contact form email failed")
-        _safe_flash(f"Error: {str(e)}", "error")
+        _safe_flash(
+            "Unable to send message right now. Configure Resend API and try again.",
+            "error",
+        )
     return redirect(url_for('index'))
 
 @app.route('/download-resume')
