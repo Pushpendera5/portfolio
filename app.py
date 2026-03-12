@@ -6,6 +6,13 @@ from bytez import Bytez
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'pushpendra_portfolio_key')
 
+
+def _get_bool_env(name, default=False):
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
 # --- AI CONFIGURATION ---
 key = os.environ.get("BYTEZ_KEY", "3f111f6b8edb9dbf37694dbceab79386")
 sdk = Bytez(key)
@@ -20,12 +27,14 @@ Projects: AI Chatbot, NLP Sentiment Analysis, Object Detection.
 """
 
 # --- MAIL CONFIGURATION ---
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'testingpushpendra@gmail.com' 
+app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = _get_bool_env('MAIL_USE_TLS', True)
+app.config['MAIL_USE_SSL'] = _get_bool_env('MAIL_USE_SSL', False)
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', 'testingpushpendra@gmail.com')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = 'testingpushpendra@gmail.com' 
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER', app.config['MAIL_USERNAME'])
+CONTACT_RECIPIENT = os.environ.get('CONTACT_RECIPIENT', app.config['MAIL_USERNAME'])
 
 mail = Mail(app)
 
@@ -134,15 +143,20 @@ def ask():
         return jsonify({"reply": "Error connecting to AI."}), 500
 @app.route('/send_message', methods=['POST'])
 def send_message():
+    if not app.config.get('MAIL_PASSWORD'):
+        flash("SMTP is not configured. Please set MAIL_PASSWORD (App Password).", "error")
+        return redirect(url_for('index'))
+
     name = request.form.get('name')
     email = request.form.get('email')
     subject = request.form.get('subject')
     message_body = request.form.get('message')
 
     msg = Message(
-        subject=f"Portfolio Contact: {subject}",
+        subject=f"Portfolio Contact: {subject or 'No Subject'}",
         sender=app.config['MAIL_USERNAME'],
-        recipients=['testingpushpendra@gmail.com'],
+        recipients=[CONTACT_RECIPIENT],
+        reply_to=email if email else None,
         body=f"Owner, naya message aaya hai!\n\nName: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
     )
     try:
