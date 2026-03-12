@@ -13,6 +13,13 @@ def _get_bool_env(name, default=False):
         return default
     return value.strip().lower() in {"1", "true", "yes", "on"}
 
+
+def _safe_flash(message, category="message"):
+    try:
+        flash(message, category)
+    except Exception:
+        app.logger.exception("Failed to write flash message")
+
 # --- AI CONFIGURATION ---
 key = os.environ.get("BYTEZ_KEY", "3f111f6b8edb9dbf37694dbceab79386")
 sdk = Bytez(key)
@@ -134,7 +141,7 @@ def ask():
         else:
             final_reply = str(ai_data)
 
-        # Cleanup: Agar model 'Assistant Answer:' prefix bhej raha ho
+        # Cleanup: Remove leading assistant label when returned by the model
         final_reply = final_reply.replace("Assistant Answer:", "").strip()
 
         return jsonify({"reply": final_reply.replace("\n", "<br>")})
@@ -143,27 +150,45 @@ def ask():
         return jsonify({"reply": "Error connecting to AI."}), 500
 @app.route('/send_message', methods=['POST'])
 def send_message():
-    if not app.config.get('MAIL_PASSWORD'):
-        flash("SMTP is not configured. Please set MAIL_PASSWORD (App Password).", "error")
-        return redirect(url_for('index'))
-
-    name = request.form.get('name')
-    email = request.form.get('email')
-    subject = request.form.get('subject')
-    message_body = request.form.get('message')
-
-    msg = Message(
-        subject=f"Portfolio Contact: {subject or 'No Subject'}",
-        sender=app.config['MAIL_USERNAME'],
-        recipients=[CONTACT_RECIPIENT],
-        reply_to=email if email else None,
-        body=f"Owner, naya message aaya hai!\n\nName: {name}\nEmail: {email}\n\nMessage:\n{message_body}"
-    )
     try:
+        required_config = {
+            "MAIL_SERVER": app.config.get("MAIL_SERVER"),
+            "MAIL_PORT": app.config.get("MAIL_PORT"),
+            "MAIL_USERNAME": app.config.get("MAIL_USERNAME"),
+            "MAIL_PASSWORD": app.config.get("MAIL_PASSWORD"),
+            "CONTACT_RECIPIENT": CONTACT_RECIPIENT,
+        }
+        missing = [key for key, value in required_config.items() if not value]
+        if missing:
+            _safe_flash(
+                f"SMTP is not configured on server. Missing: {', '.join(missing)}.",
+                "error",
+            )
+            return redirect(url_for("index"))
+
+        name = (request.form.get("name") or "").strip()
+        email = (request.form.get("email") or "").strip()
+        subject = (request.form.get("subject") or "").strip()
+        message_body = (request.form.get("message") or "").strip()
+
+        msg = Message(
+            subject=f"Portfolio Contact: {subject or 'No Subject'}",
+            sender=app.config["MAIL_USERNAME"],
+            recipients=[CONTACT_RECIPIENT],
+            reply_to=email if email else None,
+            body=(
+                "Owner, you have a new message!\n\n"
+                f"Name: {name or 'Not provided'}\n"
+                f"Email: {email or 'Not provided'}\n\n"
+                f"Message:\n{message_body or 'No message body'}"
+            ),
+        )
+
         mail.send(msg)
-        flash("Success! Your message has been sent.", "success")
+        _safe_flash("Success! Your message has been sent.", "success")
     except Exception as e:
-        flash(f"Error: {str(e)}", "error")
+        app.logger.exception("Contact form email failed")
+        _safe_flash(f"Error: {str(e)}", "error")
     return redirect(url_for('index'))
 
 @app.route('/download-resume')
