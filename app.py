@@ -1,4 +1,6 @@
 import os
+import socket
+import smtplib
 from flask import Flask, render_template, request, flash, redirect, url_for, send_from_directory, jsonify
 from flask_mail import Mail, Message
 from bytez import Bytez
@@ -38,6 +40,7 @@ app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
 app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
 app.config['MAIL_USE_TLS'] = _get_bool_env('MAIL_USE_TLS', True)
 app.config['MAIL_USE_SSL'] = _get_bool_env('MAIL_USE_SSL', False)
+app.config['MAIL_TIMEOUT'] = int(os.environ.get('MAIL_TIMEOUT', 10))
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', 'testingpushpendra@gmail.com')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER', app.config['MAIL_USERNAME'])
@@ -186,6 +189,16 @@ def send_message():
 
         mail.send(msg)
         _safe_flash("Success! Your message has been sent.", "success")
+    except (socket.timeout, TimeoutError):
+        app.logger.exception("Contact form email timed out")
+        _safe_flash(
+            "Email service timeout from server. On Render free plan, SMTP ports are blocked. "
+            "Use a paid instance or an email API provider (Resend/SendGrid/Brevo API).",
+            "error",
+        )
+    except smtplib.SMTPException as e:
+        app.logger.exception("Contact form SMTP error")
+        _safe_flash(f"SMTP error: {str(e)}", "error")
     except Exception as e:
         app.logger.exception("Contact form email failed")
         _safe_flash(f"Error: {str(e)}", "error")
