@@ -1,6 +1,9 @@
 import os
 import socket
 import smtplib
+import json
+from urllib import error as urlerror
+from urllib import request as urlrequest
 from flask import Flask, render_template, request, flash, redirect, url_for, send_from_directory, jsonify
 from flask_mail import Mail, Message
 from bytez import Bytez
@@ -21,6 +24,58 @@ def _safe_flash(message, category="message"):
         flash(message, category)
     except Exception:
         app.logger.exception("Failed to write flash message")
+
+
+def _check_smtp_connectivity(host, port, timeout_seconds=3):
+    try:
+        with socket.create_connection((host, int(port)), timeout=timeout_seconds):
+            return True, ""
+    except Exception as exc:
+        return False, str(exc)
+
+
+def _send_via_resend(subject, text_body, reply_to=None):
+    api_key = os.environ.get("RESEND_API_KEY", "").strip()
+    from_email = os.environ.get("RESEND_FROM", "").strip()
+
+    missing = []
+    if not api_key:
+        missing.append("RESEND_API_KEY")
+    if not from_email:
+        missing.append("RESEND_FROM")
+    if not CONTACT_RECIPIENT:
+        missing.append("CONTACT_RECIPIENT")
+    if missing:
+        raise ValueError(f"Missing Resend config: {', '.join(missing)}")
+
+    payload = {
+        "from": from_email,
+        "to": [CONTACT_RECIPIENT],
+        "subject": subject,
+        "text": text_body,
+    }
+    if reply_to:
+        payload["reply_to"] = reply_to
+
+    req = urlrequest.Request(
+        "https://api.resend.com/emails",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    timeout_seconds = float(os.environ.get("RESEND_TIMEOUT", "10"))
+    try:
+        with urlrequest.urlopen(req, timeout=timeout_seconds) as response:
+            response.read()
+    except urlerror.HTTPError as exc:
+        error_body = exc.read().decode("utf-8", "replace")
+        raise RuntimeError(f"Resend API error {exc.code}: {error_body}") from exc
+    except urlerror.URLError as exc:
+        raise RuntimeError(f"Resend API network error: {exc.reason}") from exc
 
 # --- AI CONFIGURATION ---
 key = os.environ.get("BYTEZ_KEY", "3f111f6b8edb9dbf37694dbceab79386")
@@ -154,6 +209,32 @@ def ask():
 @app.route('/send_message', methods=['POST'])
 def send_message():
     try:
+        name = (request.form.get("name") or "").strip()
+        email = (request.form.get("email") or "").strip()
+        subject = (request.form.get("subject") or "").strip()
+        message_body = (request.form.get("message") or "").strip()
+        final_subject = f"Portfolio Contact: {subject or 'No Subject'}"
+        final_body = (
+            "Owner, you have a new message!\n\n"
+            f"Name: {name or 'Not provided'}\n"
+            f"Email: {email or 'Not provided'}\n\n"
+            f"Message:\n{message_body or 'No message body'}"
+        )
+
+        provider = os.environ.get("MAIL_PROVIDER", "auto").strip().lower()
+        use_resend = provider == "resend" or (
+            provider == "auto" and bool(os.environ.get("RESEND_API_KEY"))
+        )
+
+        if use_resend:
+            _send_via_resend(
+                subject=final_subject,
+                text_body=final_body,
+                reply_to=email if email else None,
+            )
+            _safe_flash("Success! Your message has been sent.", "success")
+            return redirect(url_for("index"))
+
         required_config = {
             "MAIL_SERVER": app.config.get("MAIL_SERVER"),
             "MAIL_PORT": app.config.get("MAIL_PORT"),
@@ -169,22 +250,34 @@ def send_message():
             )
             return redirect(url_for("index"))
 
-        name = (request.form.get("name") or "").strip()
-        email = (request.form.get("email") or "").strip()
-        subject = (request.form.get("subject") or "").strip()
-        message_body = (request.form.get("message") or "").strip()
+        preflight_enabled = _get_bool_env("SMTP_PREFLIGHT_CHECK", True)
+        if preflight_enabled:
+            preflight_timeout = float(os.environ.get("SMTP_PREFLIGHT_TIMEOUT", "3"))
+            reachable, reason = _check_smtp_connectivity(
+                app.config["MAIL_SERVER"],
+                app.config["MAIL_PORT"],
+                timeout_seconds=preflight_timeout,
+            )
+            if not reachable:
+                _safe_flash(
+                    "SMTP server is unreachable from this host. "
+                    "On Render free web services, outbound SMTP ports are blocked.",
+                    "error",
+                )
+                app.logger.error(
+                    "SMTP preflight failed for %s:%s (%s)",
+                    app.config["MAIL_SERVER"],
+                    app.config["MAIL_PORT"],
+                    reason,
+                )
+                return redirect(url_for("index"))
 
         msg = Message(
-            subject=f"Portfolio Contact: {subject or 'No Subject'}",
+            subject=final_subject,
             sender=app.config["MAIL_USERNAME"],
             recipients=[CONTACT_RECIPIENT],
             reply_to=email if email else None,
-            body=(
-                "Owner, you have a new message!\n\n"
-                f"Name: {name or 'Not provided'}\n"
-                f"Email: {email or 'Not provided'}\n\n"
-                f"Message:\n{message_body or 'No message body'}"
-            ),
+            body=final_body,
         )
 
         mail.send(msg)
