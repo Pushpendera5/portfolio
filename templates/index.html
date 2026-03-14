@@ -276,7 +276,298 @@
         .neon-border:hover {
             box-shadow: 0 0 50px rgba(209, 60, 226, 0.6), inset 0 0 30px rgba(209, 60, 226, 0.15);
         }
-        
+
+        /* Featured Projects - Clean Technical Stack Style */
+        .featured-projects-section {
+            position: relative;
+            background: transparent;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+            overflow: visible;
+        }
+
+        /* Futuristic Project Cards */
+        .project-card {
+            animation: slideInUp 0.6s ease-out backwards;
+            perspective: 1000px;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Card Flip Animation */
+        .project-card > div {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* Neon Glow on Hover */
+        @keyframes neonGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.8)); }
+        }
+
+        .project-card:nth-child(1) {
+            animation: slideInUp 0.6s ease-out backwards, neonGlow 2s ease-in-out infinite;
+            animation-delay: 0.1s, 0s;
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .project-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        /* Old animations removed - using new projectSlideIn only */
+
+        /* Certificate section unique compact styling */
+        #Certificate {
+            background: linear-gradient(135deg, rgba(20, 15, 40, 0.7), rgba(15, 30, 50, 0.7));
+            padding: 4rem 0 !important;
+        }
+
+        #Certificate h2 {
+            color: #ff3366;
+            font-size: 1.875rem;
+            margin-bottom: 2rem;
+            animation: certTitleSlide 5s ease-in-out infinite;
+        }
+
+        @keyframes certTitleSlide {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+        }
+
+        [data-certification-card] {
+            background: linear-gradient(135deg, rgba(25, 35, 60, 0.85), rgba(15, 25, 45, 0.9));
+            border: 1px solid rgba(255, 51, 102, 0.35);
+            box-shadow: 0 8px 20px rgba(255, 51, 102, 0.15), inset 0 0 10px rgba(255, 51, 102, 0.08);
+            padding: 1.25rem;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: certCardSlideIn 0.7s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-certification-card]:nth-child(1) { animation-delay: 0.1s; }
+        [data-certification-card]:nth-child(2) { animation-delay: 0.2s; }
+        [data-certification-card]:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes certCardSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        [data-certification-card]:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(255, 51, 102, 0.8);
+            box-shadow: 0 16px 32px rgba(255, 51, 102, 0.3), 0 0 25px rgba(209, 60, 226, 0.25);
+        }
+
+        [data-certification-card]::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);
+            transform: rotate(45deg);
+            pointer-events: none;
+            animation: certShine 4s ease-in-out infinite;
+        }
+
+        @keyframes certShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        [data-certification-card] .material-symbols-outlined {
+            animation: certIconBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes certIconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        [data-certification-card] h3 {
+            font-size: 1.125rem;
+            color: #fff;
+        }
+
+        [data-certification-card] p {
+            color: #ff3366;
+            font-size: 0.875rem;
+        }
+
+        [data-certification-card] a {
+            color: #ff3366;
+            font-size: 0.75rem;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid rgba(255, 51, 102, 0.5);
+            border-radius: 999px;
+            display: inline-flex;
+            gap: 0.3rem;
+            transition: all 0.3s ease;
+        }
+
+        [data-certification-card] a:hover {
+            background: rgba(255, 51, 102, 0.2);
+            border-color: rgba(255, 51, 102, 0.8);
+            box-shadow: 0 0 12px rgba(255, 51, 102, 0.6);
+        }
+
+
+        .featured-projects-section h2 {
+            color: #2DF0AC;
+            letter-spacing: 0.6px;
+            font-size: 2.4rem;
+            text-shadow: 0 0 18px rgba(45, 240, 172, 0.8), 0 0 10px rgba(209, 60, 226, 0.5);
+        }
+
+        .featured-projects-section p {
+            color: #b3c4d5;
+            font-weight: 500;
+        }
+
+        .featured-project-card,
+        .featured-projects-section .group {
+            position: relative;
+            background: linear-gradient(145deg, rgba(10, 20, 45, 0.8), rgba(15, 35, 68, 0.95));
+            border: 1px solid rgba(17, 28, 62, 0.6);
+            border-left-color: rgba(2, 255, 232, 0.45);
+            border-top-color: rgba(151, 152, 255, 0.35);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 16px rgba(45, 240, 172, 0.15);
+        }
+
+        .featured-project-card:hover,
+        .featured-projects-section .group:hover {
+            transform: translateY(-9px) rotateX(1deg) rotateY(-1deg) scale(1.02);
+            border-color: rgba(45, 240, 172, 0.8);
+            box-shadow: 0 20px 40px rgba(45, 240, 172, 0.4), 0 0 42px rgba(209, 60, 226, 0.35);
+        }
+
+        .featured-project-card::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: inherit;
+            background: linear-gradient(130deg, rgba(45, 240, 172, 0.25), rgba(209, 60, 226, 0.25), rgba(255, 51, 102, 0.2));
+            filter: blur(18px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .featured-project-card:hover::after {
+            opacity: 1;
+        }
+
+        .featured-project-card .group-hover\:scale-110:hover {
+            transform: scale(1.08);
+        }
+
+        .featured-projects-section .project-sector {
+            background: rgba(25, 30, 50, 0.8);
+            border: 1px dashed rgba(45, 240, 172, 0.35);
+            padding: 0.6rem 1rem;
+            color: #97f7e6;
+            backdrop-filter: blur(8px);
+        }
+
+        @keyframes projectTwinkle {
+            0%, 100% { opacity: 0.85; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-4px); }
+        }
+
+        .featured-project-card {
+            animation: projectTwinkle 6.5s ease-in-out infinite;
+        }
+
+        /* Project Feature unique motion */
+        .featured-project-card::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: inherit;
+            background: linear-gradient(170deg, rgba(45, 240, 172, 0.35), rgba(209, 60, 226, 0.35));
+            opacity: 0;
+            z-index: -2;
+            filter: blur(12px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .featured-project-card:hover::after {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .featured-project-card {
+            animation: sparklePulse 6s ease-in-out infinite;
+        }
+
+        @keyframes sparklePulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(45, 240, 172, 0.15); }
+            50% { box-shadow: 0 18px 40px rgba(209, 60, 226, 0.25); }
+        }
+
+        /* Technical Stack unique styling */
+        #skills [data-skill-card] {
+            background: linear-gradient(145deg, rgba(25, 35, 62, 0.8), rgba(8, 13, 27, 0.8));
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        #skills [data-skill-card]:hover {
+            transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+            border-color: rgba(37, 99, 235, 0.7);
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.35), 0 0 20px rgba(59, 130, 246, 0.25);
+        }
+
+        #skills [data-skill-card] .material-symbols-outlined {
+            animation: iconSpin 8s linear infinite;
+        }
+
+        @keyframes iconSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #skills [data-skill-card] {
+            animation: techStackGlow 8s ease infinite;
+        }
+
+        @keyframes techStackGlow {
+            0%, 100% { box-shadow: 0 0 22px rgba(37, 99, 235, 0.2); }
+            50% { box-shadow: 0 0 36px rgba(56, 189, 248, 0.4); }
+        }
+
         /* 3D Depth Cards */
         .card-3d {
             position: relative;
@@ -924,304 +1215,250 @@
 </div>
 </section>
 
-<!-- Featured Projects -->
-<section class="py-24" id="projects">
+<!-- Featured Projects - Futuristic Design -->
+<section class="featured-projects-section py-24" id="projects">
 <div class="max-w-7xl mx-auto px-6">
-<div class="flex items-end justify-between mb-16">
-<div>
-<h2 class="text-3xl font-bold mb-4">Featured Projects</h2>
-<p class="text-slate-400">Selected academic and personal projects in AI &amp; Machine Learning.</p>
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold mb-3 gradient-text">Featured Projects</h2>
+<p class="text-slate-400 text-sm max-w-2xl mx-auto">Cutting-edge AI & ML solutions powered by advanced neural architectures and real-time processing</p>
 </div>
-<a class="text-primary font-bold flex items-center gap-2 hover:underline" href="#">
-                    View all projects
-                    <span class="material-symbols-outlined text-sm">north_east</span>
-</a>
-</div>
+
+<!-- Futuristic Project Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsAnimContainer">
-<!-- Project 1 -->
-<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl" data-project-card>
-<div class="aspect-video relative overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Blue and black tech interface for NLP analysis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBusqtoRDl5OS2iv7Fujqaz4SrLlJmVcU8KszU76c8p68Maqo7iU9p8Wg3VHwTCXjYSha_TArey2ROKVpFuMAb1tCSlwvfl1bsjQ3KfyEMUnDM_YVMk49-s3XN1-rcghxNdPsHZOIysKf82r_Ok12ryxFb8JrJl2MvSaXpcqw2J4DBwX1ldt9kxUKZiWzZ37t1xUAsVJBY0kqhlC0TbpSEZZrLRZHVPgaeoTx-kYQy5dlYn8YKnGwkVNPvbPJN_FG5ZzvFcC398Mhnw"/>
-<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-</div>
-</div>
-<div class="p-8 flex flex-col flex-1">
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">NLP</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Python</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Transformers</span>
-</div>
-<h3 class="text-xl font-bold mb-3">NLP Sentiment Analysis</h3>
-<p class="text-slate-400 text-sm mb-6 flex-1">
-                            An advanced text classification engine using BERT architectures to analyze sentiment across 1M+ customer reviews with 94% accuracy.
-                        </p>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">code</span>
-<span class="text-xs">GitHub</span>
-</a>
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">description</span>
-<span class="text-xs">Paper</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
-<div class="aspect-video relative overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Futuristic security camera and identification nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNfPpSwkHP50PnqiMl3FpR51KaIBdONi9HVQnvd-Gcfow_A2o99CPKp9wzeZvaVuuSY5u7UyJhrWVkztExdTVwwuUON0aNLOam5WoOi_aycJEM002iguAvuIB342rmioHNYQzE5INM0s9ymc4UAP030GlZsoM53j6m5V2ZWGqVkGaBJAeDRXiDulpn2dEeX_Am4Fft9aPvvBc2AVhNE2LsF0oNdSKmgt0eHNzN68iCwmprfXhNVo_wn4iBPMxSG0pFuoKTwxLWWic7"/>
-<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <!-- Project 1: NLP Sentiment Analysis -->
+        <div class="group relative project-card h-80 cursor-pointer">
+            <!-- Front Card -->
+            <div class="absolute inset-0 rounded-2xl p-6 bg-gradient-to-br from-cyan-900/30 via-slate-900 to-slate-900 border-2 border-cyan-500/50 group-hover:border-cyan-400/80 group-hover:opacity-0 transition-all duration-500 overflow-hidden opacity-100">
+                <!-- Grid Background -->
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(6, 182, 212, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                </div>
+                
+                <!-- Glow Effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-600 via-purple-600 to-cyan-600 rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 -z-10"></div>
+                
+                <div class="relative z-10 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 rounded-xl bg-cyan-500/20 border border-cyan-500/50">
+                                <span class="material-symbols-outlined text-cyan-400 text-2xl">psychology</span>
+                            </div>
+                            <span class="px-3 py-1 bg-cyan-500/20 border border-cyan-500/50 rounded-full text-cyan-300 text-xs font-bold uppercase">NLP</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-cyan-200 mb-2">NLP Sentiment Analysis</h3>
+                        <p class="text-sm text-slate-300 line-clamp-3">BERT neural network analyzing 1M+ reviews with 94% accuracy</p>
+                    </div>
+                    
+                    <!-- Expand Hint -->
+                    <div class="flex items-center gap-2 text-cyan-400 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>View Details</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back Card (Hover) -->
+            <div class="absolute inset-0 rounded-2xl p-6 bg-gradient-to-br from-cyan-900/40 via-slate-900 to-purple-900/20 border-2 border-cyan-400/80 transition-all duration-500 opacity-0 group-hover:opacity-100 overflow-hidden pointer-events-none group-hover:pointer-events-auto">
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(6, 182, 212, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                </div>
+                
+                <div class="relative z-10 h-full flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-cyan-300 mb-3">Technical Details</h3>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li class="flex gap-2"><span class="text-cyan-400">•</span> <span><strong>Model:</strong> BERT Transformers</span></li>
+                            <li class="flex gap-2"><span class="text-cyan-400">•</span> <span><strong>Dataset:</strong> 1M+ reviews</span></li>
+                            <li class="flex gap-2"><span class="text-cyan-400">•</span> <span><strong>Accuracy:</strong> 94%</span></li>
+                            <li class="flex gap-2"><span class="text-cyan-400">•</span> <span><strong>Framework:</strong> PyTorch</span></li>
+                        </ul>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="#" class="px-4 py-2 bg-cyan-500/30 border border-cyan-500 text-cyan-300 rounded-lg text-xs font-bold hover:bg-cyan-500/50 transition-all">GitHub</a>
+                        <a href="#" class="px-4 py-2 bg-purple-500/30 border border-purple-500 text-purple-300 rounded-lg text-xs font-bold hover:bg-purple-500/50 transition-all">Paper</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</div>
-</div>
-<div class="p-8 flex flex-col flex-1">
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Computer Vision</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">YOLOv8</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PyTorch</span>
-</div>
-<h3 class="text-xl font-bold mb-3">Object Detection for Security</h3>
-<p class="text-slate-400 text-sm mb-6 flex-1">
-                            Real-time multi-object detection system optimized for low-latency surveillance video feeds using custom trained YOLO models.
-                        </p>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">code</span>
-<span class="text-xs">GitHub</span>
-</a>
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">videocam</span>
-<span class="text-xs">Demo</span>
-</a>
-</div>
-</div>
-</div>
-<!--Project 3-->
-<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl" data-project-card>
-<div class="aspect-video relative overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Blue and black tech interface for NLP analysis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBusqtoRDl5OS2iv7Fujqaz4SrLlJmVcU8KszU76c8p68Maqo7iU9p8Wg3VHwTCXjYSha_TArey2ROKVpFuMAb1tCSlwvfl1bsjQ3KfyEMUnDM_YVMk49-s3XN1-rcghxNdPsHZOIysKf82r_Ok12ryxFb8JrJl2MvSaXpcqw2J4DBwX1ldt9kxUKZiWzZ37t1xUAsVJBY0kqhlC0TbpSEZZrLRZHVPgaeoTx-kYQy5dlYn8YKnGwkVNPvbPJN_FG5ZzvFcC398Mhnw"/>
-<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <!-- Project 2: Object Detection -->
+        <div class="group relative project-card h-80 cursor-pointer">
+            <!-- Front Card -->
+            <div class="absolute inset-0 rounded-2xl p-6 bg-gradient-to-br from-purple-900/30 via-slate-900 to-slate-900 border-2 border-purple-500/50 group-hover:border-purple-400/80 group-hover:opacity-0 transition-all duration-500 overflow-hidden opacity-100">
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(139, 92, 246, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                </div>
+                
+                <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 -z-10"></div>
+                
+                <div class="relative z-10 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 rounded-xl bg-purple-500/20 border border-purple-500/50">
+                                <span class="material-symbols-outlined text-purple-400 text-2xl">image_search</span>
+                            </div>
+                            <span class="px-3 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-bold uppercase">Vision</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-200 mb-2">Object Detection</h3>
+                        <p class="text-sm text-slate-300 line-clamp-3">Real-time YOLO detection for surveillance systems</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-2 text-purple-400 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>View Details</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back Card -->
+            <div class="absolute inset-0 rounded-2xl p-6 bg-gradient-to-br from-purple-900/40 via-slate-900 to-pink-900/20 border-2 border-purple-400/80 transition-all duration-500 opacity-0 group-hover:opacity-100 overflow-hidden pointer-events-none group-hover:pointer-events-auto">
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(139, 92, 246, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                </div>
+                
+                <div class="relative z-10 h-full flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-purple-300 mb-3">Technical Details</h3>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li class="flex gap-2"><span class="text-purple-400">•</span> <span><strong>Model:</strong> YOLOv8 Custom</span></li>
+                            <li class="flex gap-2"><span class="text-purple-400">•</span> <span><strong>FPS:</strong> 60+ Real-time</span></li>
+                            <li class="flex gap-2"><span class="text-purple-400">•</span> <span><strong>Classes:</strong> 20+ Objects</span></li>
+                            <li class="flex gap-2"><span class="text-purple-400">•</span> <span><strong>Framework:</strong> TensorFlow</span></li>
+                        </ul>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="#" class="px-4 py-2 bg-purple-500/30 border border-purple-500 text-purple-300 rounded-lg text-xs font-bold hover:bg-purple-500/50 transition-all">GitHub</a>
+                        <a href="#" class="px-4 py-2 bg-pink-500/30 border border-pink-500 text-pink-300 rounded-lg text-xs font-bold hover:bg-pink-500/50 transition-all">Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Project 3: Advanced NLP -->
+        <div class="group relative project-card h-80 cursor-pointer">
+            <!-- Front Card -->
+            <div class="absolute inset-0 rounded-2xl p-6 bg-gradient-to-br from-pink-900/30 via-slate-900 to-slate-900 border-2 border-pink-500/50 group-hover:border-pink-400/80 group-hover:opacity-0 transition-all duration-500 overflow-hidden opacity-100">
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(236, 72, 153, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(236, 72, 153, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                </div>
+                
+                <div class="absolute -inset-1 bg-gradient-to-r from-pink-600 via-red-600 to-pink-600 rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 -z-10"></div>
+                
+                <div class="relative z-10 h-full flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-3 rounded-xl bg-pink-500/20 border border-pink-500/50">
+                                <span class="material-symbols-outlined text-pink-400 text-2xl">smart_toy</span>
+                            </div>
+                            <span class="px-3 py-1 bg-pink-500/20 border border-pink-500/50 rounded-full text-pink-300 text-xs font-bold uppercase">NLP</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-pink-200 mb-2">Advanced NLP Engine</h3>
+                        <p class="text-sm text-slate-300 line-clamp-3">Enterprise semantic analysis with transformers</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-2 text-pink-400 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>View Details</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back Card -->
+            <div class="absolute inset-0 rounded-2xl p-6 bg-gradient-to-br from-pink-900/40 via-slate-900 to-red-900/20 border-2 border-pink-400/80 transition-all duration-500 opacity-0 group-hover:opacity-100 overflow-hidden pointer-events-none group-hover:pointer-events-auto">
+                <div class="absolute inset-0 opacity-5">
+                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(236, 72, 153, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(236, 72, 153, 0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                </div>
+                
+                <div class="relative z-10 h-full flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-pink-300 mb-3">Technical Details</h3>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li class="flex gap-2"><span class="text-pink-400">•</span> <span><strong>Model:</strong> GPT-2 Fine-tuned</span></li>
+                            <li class="flex gap-2"><span class="text-pink-400">•</span> <span><strong>Tokens:</strong> 1B+ Parameters</span></li>
+                            <li class="flex gap-2"><span class="text-pink-400">•</span> <span><strong>Languages:</strong> 50+ Supported</span></li>
+                            <li class="flex gap-2"><span class="text-pink-400">•</span> <span><strong>Framework:</strong> Hugging Face</span></li>
+                        </ul>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="#" class="px-4 py-2 bg-pink-500/30 border border-pink-500 text-pink-300 rounded-lg text-xs font-bold hover:bg-pink-500/50 transition-all">GitHub</a>
+                        <a href="#" class="px-4 py-2 bg-red-500/30 border border-red-500 text-red-300 rounded-lg text-xs font-bold hover:bg-red-500/50 transition-all">Paper</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
-</div>
-<div class="p-8 flex flex-col flex-1">
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">NLP</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Python</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Transformers</span>
-</div>
-<h3 class="text-xl font-bold mb-3">NLP Sentiment Analysis</h3>
-<p class="text-slate-400 text-sm mb-6 flex-1">
-                            An advanced text classification engine using BERT architectures to analyze sentiment across 1M+ customer reviews with 94% accuracy.
-                        </p>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">code</span>
-<span class="text-xs">GitHub</span>
-</a>
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">description</span>
-<span class="text-xs">Paper</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
-<div class="aspect-video relative overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Futuristic security camera and identification nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNfPpSwkHP50PnqiMl3FpR51KaIBdONi9HVQnvd-Gcfow_A2o99CPKp9wzeZvaVuuSY5u7UyJhrWVkztExdTVwwuUON0aNLOam5WoOi_aycJEM002iguAvuIB342rmioHNYQzE5INM0s9ymc4UAP030GlZsoM53j6m5V2ZWGqVkGaBJAeDRXiDulpn2dEeX_Am4Fft9aPvvBc2AVhNE2LsF0oNdSKmgt0eHNzN68iCwmprfXhNVo_wn4iBPMxSG0pFuoKTwxLWWic7"/>
-<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+</section>
 
+<!--Certificate section-->
+<section class="featured-projects-section" id="Certificate">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+<span class="w-1 h-8 bg-primary1 inline-block rounded-full"></span>
+Certifications & Credentials
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Certificate 1 -->
+<div class="rounded-xl overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-lg" data-certification-card>
+    <div class="p-5">
+        <div class="flex items-start gap-3 mb-3">
+            <div class="p-2 rounded-lg bg-primary1/15 border border-primary1/30">
+                <span class="material-symbols-outlined text-primary1 text-xl">school</span>
+            </div>
+            <div class="flex-1">
+                <h3 class="text-base font-bold">Machine Learning Capstone</h3>
+                <p class="text-xs">IBM</p>
+            </div>
+        </div>
+        <p class="text-xs text-slate-400 mb-3">Feb 2026</p>
+        <a href="https://www.coursera.org/account/accomplishments/records/CV1P862IYD84" target="_blank">
+            <span class="material-symbols-outlined text-sm">verified_user</span>
+            <span>View</span>
+        </a>
+    </div>
 </div>
-</div>
-<div class="p-8 flex flex-col flex-1">
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Computer Vision</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">YOLOv8</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PyTorch</span>
-</div>
-<h3 class="text-xl font-bold mb-3">Object Detection for Security</h3>
-<p class="text-slate-400 text-sm mb-6 flex-1">
-                            Real-time multi-object detection system optimized for low-latency surveillance video feeds using custom trained YOLO models.
-                        </p>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">code</span>
-<span class="text-xs">GitHub</span>
-</a>
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">videocam</span>
-<span class="text-xs">Demo</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
-<div class="aspect-video relative overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Blue and black tech interface for NLP analysis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBusqtoRDl5OS2iv7Fujqaz4SrLlJmVcU8KszU76c8p68Maqo7iU9p8Wg3VHwTCXjYSha_TArey2ROKVpFuMAb1tCSlwvfl1bsjQ3KfyEMUnDM_YVMk49-s3XN1-rcghxNdPsHZOIysKf82r_Ok12ryxFb8JrJl2MvSaXpcqw2J4DBwX1ldt9kxUKZiWzZ37t1xUAsVJBY0kqhlC0TbpSEZZrLRZHVPgaeoTx-kYQy5dlYn8YKnGwkVNPvbPJN_FG5ZzvFcC398Mhnw"/>
-<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
 
+<!-- Certificate 2 -->
+<div class="rounded-xl overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-lg" data-certification-card>
+    <div class="p-5">
+        <div class="flex items-start gap-3 mb-3">
+            <div class="p-2 rounded-lg bg-primary1/15 border border-primary1/30">
+                <span class="material-symbols-outlined text-primary1 text-xl">lab_research</span>
+            </div>
+            <div class="flex-1">
+                <h3 class="text-base font-bold">Research Methodologies</h3>
+                <p class="text-xs">Queen Mary Univ.</p>
+            </div>
+        </div>
+        <p class="text-xs text-slate-400 mb-3">Jan 2026</p>
+        <a href="https://www.coursera.org/account/accomplishments/records/3GG3VBVMM2KB" target="_blank">
+            <span class="material-symbols-outlined text-sm">verified_user</span>
+            <span>View</span>
+        </a>
+    </div>
 </div>
-</div>
-<div class="p-8 flex flex-col flex-1">
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">NLP</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Python</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Transformers</span>
-</div>
-<h3 class="text-xl font-bold mb-3">NLP Sentiment Analysis</h3>
-<p class="text-slate-400 text-sm mb-6 flex-1">
-                            An advanced text classification engine using BERT architectures to analyze sentiment across 1M+ customer reviews with 94% accuracy.
-                        </p>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">code</span>
-<span class="text-xs">GitHub</span>
-</a>
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">description</span>
-<span class="text-xs">Paper</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Project 4 -->
-<!--<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
-<div class="aspect-video relative overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Futuristic security camera and identification nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNfPpSwkHP50PnqiMl3FpR51KaIBdONi9HVQnvd-Gcfow_A2o99CPKp9wzeZvaVuuSY5u7UyJhrWVkztExdTVwwuUON0aNLOam5WoOi_aycJEM002iguAvuIB342rmioHNYQzE5INM0s9ymc4UAP030GlZsoM53j6m5V2ZWGqVkGaBJAeDRXiDulpn2dEeX_Am4Fft9aPvvBc2AVhNE2LsF0oNdSKmgt0eHNzN68iCwmprfXhNVo_wn4iBPMxSG0pFuoKTwxLWWic7"/>
-<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-</div>
-</div>
-<div class="p-8 flex flex-col flex-1">
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Computer Vision</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">YOLOv8</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PyTorch</span>
-</div>
-<h3 class="text-xl font-bold mb-3">Object Detection for Security</h3>
-<p class="text-slate-400 text-sm mb-6 flex-1">
-                            Real-time multi-object detection system optimized for low-latency surveillance video feeds using custom trained YOLO models.
-                        </p>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">code</span>
-<span class="text-xs">GitHub</span>
-</a>
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">videocam</span>
-<span class="text-xs">Demo</span>
-</a>
-</div>
-</div>
-</div>-->
-<!-- Project 5 -->
-<div class="group bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-xl">
-<div class="aspect-video relative overflow-hidden">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Healthcare data chart and medical symbols" src="https://media.istockphoto.com/id/2154273691/photo/businessman-is-showing-concept-of-future-technology-and-internet-connection-network-with-ai.jpg?s=170667a&w=0&k=20&c=zWzoh3EjN71g5VgII5nSQuvGI2ZYKcFyK6WvvOyNScY="/>
-<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-</div>
-</div>
-<div class="p-8 flex flex-col flex-1">
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Analytics</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">Scikit-learn</span>
-<span class="px-2 py-1 bg-slate-800 text-slate-400 text-[10px] font-bold uppercase rounded">PostgreSQL</span>
-</div>
-<h3 class="text-xl font-bold mb-3">Predictive Health Analytics</h3>
-<p class="text-slate-400 text-sm mb-6 flex-1">
-                            A predictive model developed to identify patient risk factors for chronic diseases using longitudinal health record data.
-                        </p>
-<div class="flex items-center gap-4 text-slate-300">
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">code</span>
-<span class="text-xs">GitHub</span>
-</a>
-<a class="flex items-center gap-1 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-lg">bar_chart</span>
-<span class="text-xs">Dashboard</span>
-</a>
-</div>
-</div>
+
+<!-- Certificate 3 -->
+<div class="rounded-xl overflow-hidden flex flex-col hover:border-primary/40 transition-all shadow-lg" data-certification-card>
+    <div class="p-5">
+        <div class="flex items-start gap-3 mb-3">
+            <div class="p-2 rounded-lg bg-primary1/15 border border-primary1/30">
+                <span class="material-symbols-outlined text-primary1 text-xl">database</span>
+            </div>
+            <div class="flex-1">
+                <h3 class="text-base font-bold">SQL Foundations</h3>
+                <p class="text-xs">Microsoft</p>
+            </div>
+        </div>
+        <p class="text-xs text-slate-400 mb-3">Aug 2025</p>
+        <a href="https://www.coursera.org/account/accomplishments/records/9AY59KZ134LZ" target="_blank">
+            <span class="material-symbols-outlined text-sm">verified_user</span>
+            <span>View</span>
+        </a>
+    </div>
 </div>
 </div>
 </div>
 </section>
-<!--Certificate section-->
-<section class="py-24 bg-white dark:bg-background-dark" id="Certificate">
-<div class="max-w-7xl mx-auto px-6">
-<h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
-<span class="w-8 h-1 bg-primary inline-block"></span>
-            Certificate
-        </h2>
-<div class="space-y-8">
-<!-- Experience Entry 1 -->
- <div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all duration-300 card-3d pulse-glow-advanced" data-certification-card>
-    <div class="flex flex-col gap-4 mb-6">
-        <div class="flex items-start gap-4">
-            <div class="p-3 rounded-lg bg-primary/10 border border-primary/30">
-                <span class="material-symbols-outlined text-primary text-2xl">school</span>
-            </div>
-            <div>
-                <h3 class="text-2xl font-bold text-white">Machine Learning Capstone</h3>
-                <p class="text-primary font-semibold">IBM</p>
-            </div>
-        </div>
-        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
-            February, 2026
-        </div>
-    </div>
-    <div class="mt-4 flex items-center gap-1 text-slate-300 hover:text-primary transition-colors">
-        <a class="flex items-center gap-1" href="https://www.coursera.org/account/accomplishments/records/CV1P862IYD84" target="_blank">
-            <span class="material-symbols-outlined text-lg">verified_user</span>
-            <span class="text-sm">View Credential</span>
-        </a>
-    </div>
-</div>
-<div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all duration-300 card-3d pulse-glow-advanced" data-certification-card>
-    <div class="flex flex-col gap-4 mb-6">
-        <div class="flex items-start gap-4">
-            <div class="p-3 rounded-lg bg-primary/10 border border-primary/30">
-                <span class="material-symbols-outlined text-primary text-2xl">lab_research</span>
-            </div>
-            <div>
-                <h3 class="text-2xl font-bold text-white">Research Methodologies</h3>
-                <p class="text-primary font-semibold">Queen Mary University Of London</p>
-            </div>
-        </div>
-        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
-            January, 2026
-        </div>
-    </div>
-    <div class="mt-4 flex items-center gap-1 text-slate-300 hover:text-primary transition-colors">
-        <a class="flex items-center gap-1" href="https://www.coursera.org/account/accomplishments/records/3GG3VBVMM2KB" target="_blank">
-            <span class="material-symbols-outlined text-lg">verified_user</span>
-            <span class="text-sm">View Credential</span>
-        </a>
-    </div>
-</div><div class="p-8 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all duration-300 card-3d pulse-glow-advanced" data-certification-card>
-    <div class="flex flex-col gap-4 mb-6">
-        <div class="flex items-start gap-4">
-            <div class="p-3 rounded-lg bg-primary/10 border border-primary/30">
-                <span class="material-symbols-outlined text-primary text-2xl">database</span>
-            </div>
-            <div>
-                <h3 class="text-2xl font-bold text-white">SQL Foundations</h3>
-                <p class="text-primary font-semibold">Microsoft</p>
-            </div>
-        </div>
-        <div class="px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold w-fit">
-            August 15, 2025
-        </div>
-    </div>
-    <div class="mt-4 flex items-center gap-1 text-slate-300 hover:text-primary transition-colors">
-        <a class="flex items-center gap-1" href="https://www.coursera.org/account/accomplishments/records/9AY59KZ134LZ" target="_blank">
-            <span class="material-symbols-outlined text-lg">verified_user</span>
-            <span class="text-sm">View Credential</span>
-        </a>
-    </div>
-</div>
 
 <!-- Contact Section -->
 <section class="py-24" id="contact">
