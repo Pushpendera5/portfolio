@@ -104,6 +104,39 @@
         #floatingCanvas {
             mix-blend-mode: screen;
         }
+
+        /* Navigation link animation */
+        .nav-animated a {
+            opacity: 0;
+            transform: translateY(-8px);
+            animation: navLinkEnter 0.5s ease forwards;
+            border-radius: 999px;
+        }
+
+        .nav-animated a:nth-child(1) { animation-delay: 0.1s; }
+        .nav-animated a:nth-child(2) { animation-delay: 0.2s; }
+        .nav-animated a:nth-child(3) { animation-delay: 0.3s; }
+        .nav-animated a:nth-child(4) { animation-delay: 0.4s; }
+        .nav-animated a:nth-child(5) { animation-delay: 0.5s; }
+        .nav-animated a:nth-child(6) { animation-delay: 0.6s; }
+        .nav-animated a:nth-child(7) { animation-delay: 0.7s; }
+        .nav-animated a:nth-child(8) { animation-delay: 0.8s; }
+
+        .nav-animated a:hover {
+            animation: navLinkGlow 0.8s ease-in-out infinite alternate;
+            color: #2DF0AC;
+            text-shadow: 0 0 8px rgba(45, 240, 172, 0.8), 0 0 16px rgba(209, 60, 226, 0.6);
+        }
+
+        @keyframes navLinkEnter {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes navLinkGlow {
+            from { text-shadow: 0 0 0 rgba(45, 240, 172, 0); }
+            to { text-shadow: 0 0 12px rgba(45, 240, 172, 0.8), 0 0 20px rgba(209, 60, 226, 0.5); }
+        }
         
         /* Gradient text animation */
         .gradient-text {
@@ -346,6 +379,51 @@
             font-size: 1.875rem;
             margin-bottom: 2rem;
             animation: certTitleSlide 5s ease-in-out infinite;
+        }
+
+        /* PUSHPENDRA's PORTFOLIO - Premium Animation */
+        .portfolio-title {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, #ff3366, #d13ce2, #2df0ac, #d13ce2, #ff3366);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleShimmer 4s ease-in-out infinite, titleGlow 3s ease-in-out infinite;
+            letter-spacing: 0.5px;
+        }
+
+        .portfolio-title::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background: linear-gradient(90deg, rgba(255, 51, 102, 0.3), rgba(209, 60, 226, 0.3), rgba(45, 240, 172, 0.3));
+            background-size: 300% 100%;
+            animation: titleShimmer 4s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes titleShimmer {
+            0%, 100% { 
+                background-position: 0% center;
+            }
+            50% { 
+                background-position: 100% center;
+            }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 8px rgba(209, 60, 226, 0.6)) drop-shadow(0 0 20px rgba(255, 51, 102, 0.3));
+            }
+            50% { 
+                filter: drop-shadow(0 0 15px rgba(209, 60, 226, 0.9)) drop-shadow(0 0 30px rgba(45, 240, 172, 0.5));
+            }
         }
 
         @keyframes certTitleSlide {
@@ -791,9 +869,9 @@
 <div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
 <span class="material-symbols-outlined text-2xl">neurology</span>
 </div>
-<span class="text-xl font-bold tracking-tight">PUSHPENDRA's PORTFOLIO</span>
+<span class="text-xl font-bold tracking-tight portfolio-title" data-text="PUSHPENDRA's PORTFOLIO">PUSHPENDRA's PORTFOLIO</span>
 </div>
-<div class="hidden md:flex items-center gap-8">
+<div class="hidden md:flex items-center gap-8 nav-animated">
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#about">About</a>
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#education">Education</a>
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#skills">Skills</a>
@@ -802,9 +880,7 @@
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#Certificate">Certificate</a>
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#contact">Contact</a>
 <a href="/download-resume"
-   class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all transform hover:scale-105">
-    Resume
-</a>
+   class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all transform hover:scale-105">Resume</a>
 
 </div>
 <div class="md:hidden">
