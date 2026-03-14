@@ -928,6 +928,7 @@
     // Simple Messaging UI Mockup
     // Isse replace karein purane addMessage aur handleSend logic ko
 const addMessage = (text, isUser = false) => {
+    const chatMessages = document.getElementById('chat-messages');
     const msgDiv = document.createElement('div');
     msgDiv.className = 'flex flex-col ' + (isUser ? 'items-end' : '');
     
