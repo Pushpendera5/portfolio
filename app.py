@@ -146,6 +146,11 @@ mail = Mail(app)
 def index():
     return render_template('index.html')
 
+@app.route('/keepalive', methods=['GET', 'POST'])
+def keepalive():
+    """Keep-alive endpoint to prevent server/model timeout"""
+    return jsonify({"status": "alive", "timestamp": str(__import__('datetime').datetime.now())})
+
 # --- YOUR PERSONAL DATA ---
 # Edit this section to add more details about your projects or hobbies
 MY_INFO = """
@@ -175,57 +180,383 @@ Pushpendra Sachan is an AI/ML Engineer pursuing MCA from Manipal University Jaip
 Your job is to provide information about Pushpendra's skills, projects, and experience to recruiters and visitors.
 """
 MY_CONTEXT = """
+*** IMPORTANT: This AI Chatbot is developed ONLY by Pushpendra Sachan as a solo project. No team involved. Pushpendra Sachan is the sole developer, creator, and owner. ***
+
 Subject: Pushpendra Sachan
 Role: Technical Support Engineer & AI/ML Aspirant
 Contact: sachanpushpendra03@gmail.com | +91-6388098635
 Location: Kanpur, Uttar Pradesh
 LinkedIn: linkedin.com/in/pushpendra-sachan-942095252
 
-Current Experience: Technical Support Engineer at POXO RFID AUTOMATION (Oct 2023 - Present). 
-Key Achievements: 96% first-contact resolution rate, reduced deployment timelines by 38% using SCCM.
+PERSONAL INFORMATION:
+- Name: Pushpendra Sachan
+- Age: 22 years old
+- Location: Kanpur, Uttar Pradesh, India
+- Email: sachanpushpendra03@gmail.com
+- Phone: +91-6388098635
+- LinkedIn: linkedin.com/in/pushpendra-sachan-942095252
 
-Expertise: 
-- Infrastructure: Active Directory, TCP/IP, LAN/WAN, DNS/DHCP, Firewalls.
-- Systems: SCCM, Windows Server, PowerShell Scripting, OS Imaging (WDS/MDT).
-- Specialized: RFID Automation, CCTV, Access Control.
-- Cloud/Virtualization: VMware, Hyper-V, AWS EC2, Azure VMs.
-- Databases: MS SQL Server (T-SQL).
+ABOUT:
+Pushpendra Sachan is a Technical Support Engineer & AI/ML Aspirant based in Kanpur, Uttar Pradesh. Currently, he works at POXO RFID AUTOMATION since October 2023. In this role, he has achieved a remarkable 96% first-contact resolution rate and has successfully reduced deployment timelines by 38% using SCCM. He is passionate about building scalable AI/ML solutions and combining them with infrastructure expertise.
 
-Education:
-- MCA in AI (2024 - Present) from Manipal University Jaipur.
-- B.Sc. in Mathematics (2022).
--12th in vikas vidhya mandir with 88.8%
--10th in vikas vidhya mandir with 85%.
+PASSION & GOALS:
+- Passionate about both technical support and AI/ML
+- Interested in building intelligent automation systems
+- Goal: Combine RFID automation with AI for smart solutions
+- Aspires to work on cutting-edge ML/AI projects
+
+TECHNICAL EXPERTISE:
+
+Infrastructure & Networking:
+- Active Directory, TCP/IP, LAN/WAN, DNS/DHCP, Firewalls
+- Network troubleshooting and optimization
+- IT Infrastructure management
+
+Systems Administration:
+- SCCM (Systems Center Configuration Manager) - 38% deployment timeline reduction
+- Windows Server administration
+- PowerShell Scripting for automation
+- OS Imaging (WDS/MDT)
+- Group Policy management
+- 96% first-contact resolution rate in current role
+
+Specialized Technologies:
+- RFID Automation & RFID Technology
+- CCTV systems integration
+- Access Control systems
+- IoT device management
+
+Cloud & Virtualization:
+- VMware
+- Hyper-V
+- AWS EC2 instances
+- Microsoft Azure VMs
+- Cloud infrastructure optimization
+
+Programming & Development:
+- Python (AI/ML focus)
+- Flask web framework
+- Django web framework
+- SQL & Database Management
+- T-SQL (MS SQL Server)
+- JavaScript
+- HTML/CSS
+
+AI/ML & Data Science:
+- Deep Learning
+- Computer Vision (Face Recognition, Object Detection)
+- Natural Language Processing (NLP)
+- Sentiment Analysis
+- Machine Learning workflows
+
+EDUCATION:
+- MCA in Artificial Intelligence (2024 - Present) - Manipal University Jaipur, 3rd Semester
+- B.Sc. in Mathematics (2022)
+- 12th Grade: 88.8% from Vikas Vidhya Mandir
+- 10th Grade: 85% from Vikas Vidhya Mandir
+
+CURRENT EMPLOYMENT:
+- Title: Technical Support Engineer
+- Company: POXO RFID AUTOMATION
+- Duration: October 2023 - Present
+- Key Achievements:
+  * 96% first-contact resolution rate
+  * 38% reduction in deployment timelines using SCCM
+  * Expert in RFID automation and infrastructure support
+
+PREVIOUS EXPERIENCE:
+- Technical Support Engineer at Zeel Infotech (Bharti Airtel nodal office) - Provided infrastructure and system support
+
+KEY PROJECTS:
+1. Automated Attendance System using Face Recognition
+   - Built a face recognition system for employee attendance tracking
+   - Supports 50+ employees
+   - Real-time identification and logging
+
+2. Restaurant Management App with WhatsApp Integration
+   - Full-stack application with order management
+   - WhatsApp API integration for ordering
+   - Database-backed order tracking system
+
+3. AI Chatbot using Bytez SDK
+   - Conversational AI with memory system
+   - Context-aware responses
+   - Deployed on personal portfolio
+
+4. NLP Sentiment Analysis
+   - Analyzes text sentiment (positive/negative)
+   - Applied to social media monitoring
+
+5. Object Detection System
+   - Computer vision based object identification
+   - Real-time detection capabilities
+
+INTERESTS & HOBBIES:
+- AI and Machine Learning research
+- Building end-to-end ML solutions
+- Automation and systems optimization
+- Open source contributions
+- Technical writing and documentation
+
+TECHNICAL SKILLS SUMMARY:
+- Languages: Python, SQL, PowerShell, JavaScript, HTML/CSS
+- Web Frameworks: Flask, Django
+- AI/ML: Deep Learning, CV, NLP
+- Cloud: AWS, Azure
+- Virtualization: VMware, Hyper-V
+- Tools: SCCM, Active Directory, Git
+
+SOFT SKILLS:
+- Problem-solving and troubleshooting
+- 96% customer satisfaction (first-contact resolution)
+- Leadership and teamwork
+- Clear communication
+- Ability to learn new technologies quickly
+
+ACHIEVEMENTS:
+- 38% improvement in deployment timelines
+- 96% first-contact resolution rate
+- Successfully completed multiple AI/ML projects
+- Currently pursuing advanced degree in AI/ML
+
+AVAILABILITY:
+- Open to job opportunities in AI/ML, Data Science
+- Available for freelance/consulting projects
+- Willing to relocate for right opportunity
+
+ABOUT THIS AI CHATBOT:
+- **SOLE DEVELOPER**: Pushpendra Sachan (100% developed by him, no team)
+- **OWNER**: Pushpendra Sachan
+- **CREATOR**: Pushpendra Sachan  
+- **MANAGER/BOSS**: Pushpendra Sachan (it's his project)
+- **Purpose**: Intelligent assistant for the portfolio website
+- **Built Entirely By**: Pushpendra Sachan (solo project)
+- **Technologies Used**: Python, Flask, Bytez AI SDK, JavaScript
+- **Features**: Conversation memory, context-aware responses, portfolio data
+- **IMPORTANT**: When asked who created/developed/built/owns this chatbot - Answer ALWAYS: "Pushpendra Sachan is the sole developer and creator. He built this as a solo project."
+- **NO TEAM, NO COMPANY** - This chatbot is entirely Pushpendra Sachan's creation
+- This AI showcases Pushpendra's AI/ML development and engineering skills
+
+LINKS & PORTFOLIO:
+- Portfolio Website: (This website)
+- GitHub: Available in portfolio
+- LinkedIn: linkedin.com/in/pushpendra-sachan-942095252
+- Email: sachanpushpendra03@gmail.com
 """
 @app.route('/ask', methods=['POST'])
 def ask():
     try:
+        from datetime import datetime
+        
         data = request.json
         user_message = data.get("message")
+        conversation_history = data.get("conversation_history", [])
         
-        # Aggressive Language Instruction
-        prompt = f"""
-        [STRICT RULE: RESPOND IN THE SAME LANGUAGE AS THE USER]
-        If user asks in English, reply in English.
-        If user asks in Hindi, reply in English.
-        Identity: You are the AI Assistant for Pushpendra Sachan's Portfolio.
-        Personal Data: {MY_CONTEXT}
+        # Clean up context by removing HTML tags
+        clean_context = MY_CONTEXT.replace("<br>", "\n").replace("<br/>", "\n").replace("<br />", "\n")
         
-        STRICT RULES:
-        1. If the user asks about Pushpendra (Who is he? Skills? Work? Education?), ONLY use the 'Personal Data' above. 
-        2. If the user asks general questions (e.g., "What is Python?", "How to fix a slow PC?"), use your general AI knowledge to answer.
-        3. Keep all answers VERY CONCISE (maximum 5-6 sentences).
-        4. Match the user's language (Hindi, English, or Hinglish).
-        5. Do not talk about things not present in the data if the question is about Pushpendra.
+        # Build conversation context from history
+        conversation_context = ""
+        if conversation_history:
+            conversation_context = "\n\nConversation History:\n"
+            for msg in conversation_history:
+                role = "User" if msg['role'] == 'user' else "Assistant"
+                conversation_context += f"{role}: {msg['content']}\n"
         
-        Developer Info: {MY_INFO}
-        Identity: You are Pushpendra Sachan's AI Assistant. Do NOT say "I am Pushpendra". 
+        # Check if this is a REPEATED question (same question asked before)
+        def is_similar_question(q1, q2, threshold=0.6):
+            """Check if two questions are similar (70%+ word overlap)"""
+            words1 = set(q1.lower().split())
+            words2 = set(q2.lower().split())
+            if not words1 or not words2:
+                return False
+            intersection = len(words1.intersection(words2))
+            union = len(words1.union(words2))
+            similarity = intersection / union if union > 0 else 0
+            return similarity >= threshold
         
+        # Count how many times similar question was asked
+        repeated_count = 0
+        if conversation_history:
+            for msg in conversation_history:
+                if msg['role'] == 'user' and is_similar_question(user_message, msg['content']):
+                    repeated_count += 1
         
-        Context: {MY_CONTEXT}
+        is_repeated_question = repeated_count > 0
+        repeat_instruction = ""
+        if is_repeated_question:
+            repeat_instruction = f"\n\n**IMPORTANT**: This question (or similar) was asked {repeated_count} time(s) before. You provided an answer before. NOW give a DIFFERENT variation/rephrasing of that answer - same meaning, but different words and structure. Use different examples or explanations."
         
-        User Question: {user_message}
-        Assistant Answer:"""
+        # Detect if this is a greeting/casual message (NOT asking about Pushpendra)
+        greeting_keywords = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'howdy', 'hola', 'namaste', 'how are you', 'whats up', 'wassup']
+        user_lower = user_message.lower()
+        is_greeting = any(keyword in user_lower for keyword in greeting_keywords)
+        
+        # Check if asking about Pushpendra (skills, projects, experience, etc)
+        pushpendra_keywords = ['pushpendra', 'your skills', 'your projects', 'your experience', 'your work', 'what do you do', 'portfolio', 'your background', 'who are you', 'what are your skills', 'about you', 'tell me about', 'your expertise']
+        is_asking_about_pushpendra = any(keyword in user_lower for keyword in pushpendra_keywords)
+        
+        # Detect if asking about this CHATBOT specifically (developer, creator, builder) - CHECK FIRST PRIORITY
+        asking_about_chatbot_creator = any(kw in user_lower for kw in ['who created you', 'who built you', 'your developer', 'your creator', 'who made you', 'who developed you', 'who built this', 'your boss', 'your owner', 'who created this chatbot', 'who is behind this', 'who developed this chatbot', 'who is your boss', 'who is the boss', 'who is my boss', 'my boss', 'your boss', 'boss', 'owner', 'whos your boss', 'whats your boss', 'who made this', 'who developed this', 'who is behind', 'who developed me', 'who is my developer', 'who created me', 'developer', 'creator', 'built me', 'created me', 'made me', 'your creator'])
+        
+        # DEBUG: Log detection for chatbot creator questions
+        print(f"[DEBUG] user_lower: '{user_lower}'")
+        print(f"[DEBUG] asking_about_chatbot_creator: {asking_about_chatbot_creator}")
+        
+        # Detect WHAT specifically is being asked about Pushpendra
+        asking_about_skills = any(kw in user_lower for kw in ['skill', 'expertise', 'what can you do', 'know', 'proficient'])
+        asking_about_projects = any(kw in user_lower for kw in ['project', 'built', 'created', 'worked on'])
+        asking_about_experience = any(kw in user_lower for kw in ['experience', 'background', 'worked', 'job', 'company'])
+        asking_who = any(kw in user_lower for kw in ['who is', 'who are you', 'tell me about', 'about you', 'introduce'])
+        
+        # Get current time for greeting
+        current_hour = datetime.now().hour
+        if current_hour < 12:
+            time_greeting = "Good morning"
+        elif current_hour < 18:
+            time_greeting = "Good afternoon"
+        else:
+            time_greeting = "Good evening"
+        
+        # Different prompts based on whether asking about Pushpendra
+        if asking_about_chatbot_creator:
+            # CHATBOT CREATOR MODE - ABSOLUTE PRIORITY - Clear answer: Pushpendra Sachan only
+            prompt = f"""IMPORTANT: This is a SPECIAL QUESTION about THIS AI CHATBOT specifically.
+
+**ABSOLUTE RULE - THIS IS NOT A GENERAL QUESTION:**
+The user is asking about WHO CREATED/OWNS/RUNS THIS CHATBOT - Not about AI assistants in general.
+
+**THE ANSWER IS ALWAYS:** Pushpendra Sachan
+
+- "who is your boss?" → "Pushpendra Sachan is the boss of this chatbot. He's the sole developer who created me."
+- "who created you?" → "Pushpendra Sachan created me using Python, Flask, and Bytez AI SDK."
+- "who is the owner?" → "Pushpendra Sachan is the sole owner and developer of this chatbot."
+- "boss?" → "Pushpendra Sachan is the boss. He built this chatbot."
+
+**CRITICAL:**
+- This is about THIS specific chatbot, not AI in general
+- DO NOT say "I don't have a boss" or "AI assistants don't have bosses"
+- ALWAYS answer: "Pushpendra Sachan"
+- NEVER mention any company (except in context of HIS employment)
+- NEVER say Pushpendra has a boss
+- Pushpendra Sachan created this chatbot as a solo project - HE is the boss{repeat_instruction}
+
+{clean_context}
+
+PREVIOUS CONVERSATION:
+{conversation_context if conversation_context else "(First message)"}
+
+USER ASKED: {user_message}
+
+ANSWER (MUST be about Pushpendra Sachan being the boss/creator of THIS chatbot - 1-2 sentences):"""
+        elif is_asking_about_pushpendra:
+            # SPECIFIC MODE - Answer ONLY what was asked, not everything
+            context_hint = "ABOUT PUSHPENDRA:\n" + clean_context
+            
+            if asking_about_skills:
+                prompt = f"""You are Pushpendra Sachan's AI Assistant. Answer about his skills in 1-2 sentences MAX.{repeat_instruction}
+
+{context_hint}
+
+PREVIOUS CONVERSATION:
+{conversation_context if conversation_context else "(First message)"}
+
+RULES:
+- Answer from the portfolio data above
+- Focus on Pushpendra's technical skills/expertise
+- Be concise (1-2 sentences)
+- NO labels like "Answer:" or "Response:"
+- Mention specific technologies/tools
+
+USER ASKED: {user_message}
+
+ANSWER (1-2 sentences):"""
+            elif asking_about_projects:
+                prompt = f"""You are Pushpendra Sachan's AI Assistant. Answer about his projects in 1-2 sentences MAX.{repeat_instruction}
+
+{context_hint}
+
+PREVIOUS CONVERSATION:
+{conversation_context if conversation_context else "(First message)"}
+
+RULES:
+- Answer from the portfolio data above
+- Mention specific projects he has built
+- Be concise (1-2 sentences)
+- NO labels like "Answer:" or "Response:"
+- If asked about a specific project, provide details
+
+USER ASKED: {user_message}
+
+ANSWER (1-2 sentences):"""
+            elif asking_about_experience:
+                prompt = f"""You are Pushpendra Sachan's AI Assistant. Answer about his experience/background in 1-2 sentences MAX.{repeat_instruction}
+
+{context_hint}
+
+PREVIOUS CONVERSATION:
+{conversation_context if conversation_context else "(First message)"}
+
+RULES:
+- Answer from the portfolio data above
+- Share his work experience and education
+- Be concise (1-2 sentences)
+- NO labels like "Answer:" or "Response:"
+- Mention relevant achievements/milestones
+
+USER ASKED: {user_message}
+
+ANSWER (1-2 sentences):"""
+            elif asking_who:
+                prompt = f"""You are Pushpendra Sachan's AI Assistant. Give a brief intro in 1-2 sentences MAX.{repeat_instruction}
+
+{context_hint}
+
+PREVIOUS CONVERSATION:
+{conversation_context if conversation_context else "(First message)"}
+
+RULES:
+- Give a brief intro with his role and expertise
+- Be concise (1-2 sentences)
+- NO labels like "Answer:" or "Response:"
+- Make it friendly and informative
+- Highlight what makes him unique
+
+USER ASKED: {user_message}
+
+BRIEF INTRO (1-2 sentences):"""
+            else:
+                # Generic Pushpendra question
+                prompt = f"""You are Pushpendra Sachan's AI Assistant. Answer in 1-2 sentences MAX.{repeat_instruction}
+
+{context_hint}
+
+PREVIOUS CONVERSATION:
+{conversation_context if conversation_context else "(First message)"}
+
+RULES:
+- Answer from the portfolio data above
+- Be helpful and informative
+- Be concise (1-2 sentences)
+- NO labels like "Answer:", "Response:", etc
+- Provide clear, direct answers
+- Remember conversation context
+
+USER ASKED: {user_message}
+
+ANSWER (1-2 sentences):"""
+        else:
+            # GENERAL/CASUAL MODE - friendly replies with general knowledge
+            prompt = f"""{time_greeting}! I'm Pushpendra's AI Assistant.{repeat_instruction}
+
+PREVIOUS CONVERSATION:
+{conversation_context if conversation_context else "(First message)"}
+
+Answer the user's question in 1-2 sentences in a friendly, conversational way. You can provide general knowledge and helpful information for any topic. Be casual, fun, and helpful. Remember the previous conversation and respond naturally. If they ask about Pushpendra or his work specifically, mention he's an AI/ML engineer and invite them to ask more.
+
+USER MESSAGE: {user_message}
+
+FRIENDLY REPLY (1-2 sentences):"""
         
 
         results = model.run([{"role": "user", "content": prompt}])
@@ -238,8 +569,20 @@ def ask():
         else:
             final_reply = str(ai_data)
 
-        # Cleanup: Remove leading assistant label when returned by the model
-        final_reply = final_reply.replace("Assistant Answer:", "").strip()
+        # Aggressive cleanup: Remove leading assistant label when returned by the model
+        final_reply = final_reply.replace("Assistant Answer:", "").replace("Assistant:", "").strip()
+        
+        # Remove the user's question if it appears at the start of the answer
+        if user_message and final_reply.lower().startswith(user_message.lower()):
+            final_reply = final_reply[len(user_message):].strip()
+        
+        # Remove any labels like "Answer:", "Response:", etc
+        final_reply = final_reply.lstrip("Answer:").lstrip("Response:").lstrip("Reply:").lstrip("Brief Answer:").strip()
+        
+        # If response is too long (more than 3 sentences), truncate it
+        sentences = final_reply.split('. ')
+        if len(sentences) > 2:
+            final_reply = '. '.join(sentences[:2]) + ('.' if not sentences[1].endswith('.') else '')
 
         return jsonify({"reply": final_reply.replace("\n", "<br>")})
 
@@ -401,6 +744,7 @@ def send_message():
         app.logger.exception("Contact form email failed")
         _safe_flash(
             "Unable to send message right now. Configure Resend API and try again.",
+
             "error",
         )
     return redirect(url_for('index'))

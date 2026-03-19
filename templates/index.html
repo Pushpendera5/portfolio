@@ -40,6 +40,10 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
+        
+        html {
+            scroll-behavior: smooth;
+        }
         .hero-pattern {
             background-color: #0f1623;
             background-image: radial-gradient(#1e293b 0.5px, transparent 0.1px);
@@ -72,22 +76,27 @@
             z-index: 10;
         }
         
-        /* 3D Animation Styles */
+        /* 3D Animation Styles - Optimized */
         .skill-tag {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
             position: relative;
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
         }
         
         .skill-tag:hover {
             transform: perspective(1000px) rotateX(10deg) rotateY(-10deg) translateZ(20px);
-            filter: drop-shadow(0 0 20px #d13ce2);
+            filter: drop-shadow(0 0 15px rgba(209, 60, 226, 0.6));
         }
         
 
         
         [data-project-card] {
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
             transform-style: preserve-3d;
+            will-change: transform, box-shadow;
+            backface-visibility: hidden;
         }
         
         [data-project-card]:hover {
@@ -105,47 +114,45 @@
             mix-blend-mode: screen;
         }
 
-        /* Navigation link animation */
+        /* Navigation link animation - Optimized */
         .nav-animated a {
             opacity: 0;
-            transform: translateY(-8px);
-            animation: navLinkEnter 0.5s ease forwards;
+            transform: translateY(-8px) translateZ(0);
+            animation: navLinkEnter 0.4s ease forwards;
             border-radius: 999px;
+            backface-visibility: hidden;
+            will-change: transform, opacity;
         }
 
-        .nav-animated a:nth-child(1) { animation-delay: 0.1s; }
-        .nav-animated a:nth-child(2) { animation-delay: 0.2s; }
-        .nav-animated a:nth-child(3) { animation-delay: 0.3s; }
-        .nav-animated a:nth-child(4) { animation-delay: 0.4s; }
-        .nav-animated a:nth-child(5) { animation-delay: 0.5s; }
-        .nav-animated a:nth-child(6) { animation-delay: 0.6s; }
-        .nav-animated a:nth-child(7) { animation-delay: 0.7s; }
-        .nav-animated a:nth-child(8) { animation-delay: 0.8s; }
+        .nav-animated a:nth-child(1) { animation-delay: 0.05s; }
+        .nav-animated a:nth-child(2) { animation-delay: 0.1s; }
+        .nav-animated a:nth-child(3) { animation-delay: 0.15s; }
+        .nav-animated a:nth-child(4) { animation-delay: 0.2s; }
+        .nav-animated a:nth-child(5) { animation-delay: 0.25s; }
+        .nav-animated a:nth-child(6) { animation-delay: 0.3s; }
+        .nav-animated a:nth-child(7) { animation-delay: 0.35s; }
+        .nav-animated a:nth-child(8) { animation-delay: 0.4s; }
 
         .nav-animated a:hover {
-            animation: navLinkGlow 0.8s ease-in-out infinite alternate;
+            animation: none;
             color: #2DF0AC;
             text-shadow: 0 0 8px rgba(45, 240, 172, 0.8), 0 0 16px rgba(209, 60, 226, 0.6);
         }
 
         @keyframes navLinkEnter {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes navLinkGlow {
-            from { text-shadow: 0 0 0 rgba(45, 240, 172, 0); }
-            to { text-shadow: 0 0 12px rgba(45, 240, 172, 0.8), 0 0 20px rgba(209, 60, 226, 0.5); }
+            from { opacity: 0; transform: translateY(-8px) translateZ(0); }
+            to { opacity: 1; transform: translateY(0) translateZ(0); }
         }
         
-        /* Gradient text animation */
+        /* Gradient text animation - Optimized */
         .gradient-text {
             background: linear-gradient(90deg, #ff3366, #d13ce2, #2df0ac);
             background-size: 300% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 6s ease infinite;
+            animation: gradientShift 8s ease infinite;
+            will-change: background-position;
         }
         
         @keyframes gradientShift {
@@ -153,14 +160,24 @@
             50% { background-position: 100% center; }
         }
         
-        /* Pulse animation */
+        /* Pulse animation - Optimized for performance */
         @keyframes pulse-glow {
-            0%, 100% { filter: drop-shadow(0 0 10px rgba(209, 60, 226, 0.5)); }
-            50% { filter: drop-shadow(0 0 30px rgba(209, 60, 226, 0.8)); }
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(209, 60, 226, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(209, 60, 226, 0.5)); }
         }
         
         .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        /* Futuristic Text Glow Animation */
+        @keyframes textGlowFuturistic {
+            0%, 100% { 
+                filter: drop-shadow(0 0 8px rgba(209, 60, 226, 0.4)) drop-shadow(0 0 16px rgba(255, 51, 102, 0.2));
+            }
+            50% { 
+                filter: drop-shadow(0 0 20px rgba(209, 60, 226, 0.8)) drop-shadow(0 0 40px rgba(255, 51, 102, 0.5)) drop-shadow(0 0 60px rgba(45, 240, 172, 0.2));
+            }
         }
         
         /* Enhanced Futuristic Styles */
@@ -184,14 +201,16 @@
             z-index: 0;
         }
         
-        /* 3D Card Effects */
+        /* 3D Card Effects - Optimized */
         [data-project-card],
         [data-experience-card] {
             position: relative;
             z-index: 1;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
             transform-style: preserve-3d;
             perspective: 1200px;
+            will-change: transform, box-shadow;
+            backface-visibility: hidden;
         }
         
         [data-project-card]::before,
@@ -210,6 +229,7 @@
             transition: opacity 0.4s ease;
             z-index: -1;
             pointer-events: none;
+            will-change: opacity;
         }
         
         [data-project-card]:hover::before,
@@ -217,7 +237,7 @@
             opacity: 1;
         }
         
-        /* Neon Border Animation */
+        /* Neon Border Animation - Optimized */
         [data-project-card],
         [data-experience-card] {
             border: 1px solid rgba(209, 60, 226, 0.2);
@@ -233,54 +253,81 @@
                 0 0 60px rgba(209, 60, 226, 0.2);
         }
         
-        /* Floating Animation */
+        /* Floating Animation - Optimized */
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0px) translateZ(0); }
+            50% { transform: translateY(-8px) translateZ(0); }
         }
         
         [data-animate] {
-            animation: float 4s ease-in-out infinite;
+            animation: float 5s ease-in-out infinite;
+            will-change: transform;
+            backface-visibility: hidden;
         }
         
-        /* Text Glow Animation */
+        /* Text Glow Animation - Optimized */
         @keyframes text-glow {
-            0% { text-shadow: 0 0 10px rgba(209, 60, 226, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(209, 60, 226, 0.8), 0 0 30px rgba(209, 60, 226, 0.6); }
-            100% { text-shadow: 0 0 10px rgba(209, 60, 226, 0.5); }
+            0% { text-shadow: 0 0 5px rgba(209, 60, 226, 0.4); }
+            50% { text-shadow: 0 0 15px rgba(209, 60, 226, 0.6), 0 0 20px rgba(209, 60, 226, 0.4); }
+            100% { text-shadow: 0 0 5px rgba(209, 60, 226, 0.4); }
         }
         
         h1, h2, h3 {
             font-weight: 800;
             letter-spacing: -0.5px;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
+            backface-visibility: hidden;
         }
         
-        /* Smooth scroll behavior */
+        /* Performance Optimization */
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Chatbot Fixed Positioning - Always Visible */
+        #chatbot-wrapper {
+            position: fixed !important;
+            bottom: 24px !important;
+            right: 24px !important;
+            top: auto !important;
+            left: auto !important;
+            z-index: 9999 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-end !important;
+            pointer-events: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: auto !important;
+            height: auto !important;
+            transform: none !important;
+            will-change: auto !important;
+        }
+        
+        body {
+            backface-visibility: hidden;
         }
         
         /* Enhanced backdrop blur */
         .glass-nav {
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(209, 60, 226, 0.1);
+            will-change: backdrop-filter;
         }
         
         /* Button glow effects */
         button, a[class*="bg-primary"] {
             position: relative;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            will-change: transform, filter;
+            backface-visibility: hidden;
         }
         
         button:hover, a[class*="bg-primary"]:hover {
             filter: drop-shadow(0 0 20px rgba(209, 60, 226, 0.6));
             transform: scale(1.05);
-        }
-        
-        /* Global transition */
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         /* ============================================
@@ -381,31 +428,37 @@
             animation: certTitleSlide 5s ease-in-out infinite;
         }
 
-        /* PUSHPENDRA's PORTFOLIO - Premium Animation */
+        /* PUSHPENDRA's PORTFOLIO - Futuristic Gradient Text */
         .portfolio-title {
-            position: relative;
-            display: inline-block;
-            background: linear-gradient(90deg, #ff3366, #d13ce2, #2df0ac, #d13ce2, #ff3366);
+            background: linear-gradient(90deg, #ff3366 0%, #ff1493 25%, #d13ce2 50%, #4faece 75%, #ff3366 100%);
             background-size: 300% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: titleShimmer 4s ease-in-out infinite, titleGlow 3s ease-in-out infinite;
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            animation: portfolioGradient 5s ease infinite, portfolioGlow 3.5s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(255, 20, 147, 0.6);
+            filter: drop-shadow(0 0 25px rgba(209, 60, 226, 0.5)) drop-shadow(0 0 15px rgba(255, 51, 102, 0.4));
+            font-size: 1.3rem;
         }
 
         .portfolio-title::before {
-            content: attr(data-text);
-            position: absolute;
-            left: 0;
-            top: 0;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background: linear-gradient(90deg, rgba(255, 51, 102, 0.3), rgba(209, 60, 226, 0.3), rgba(45, 240, 172, 0.3));
-            background-size: 300% 100%;
-            animation: titleShimmer 4s ease-in-out infinite;
-            opacity: 0.5;
+            display: none !important;
+        }
+        
+        @keyframes portfolioGradient {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+        
+        @keyframes portfolioGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.7)) drop-shadow(0 0 35px rgba(209, 60, 226, 0.4));
+            }
+            50% { 
+                filter: drop-shadow(0 0 30px rgba(209, 60, 226, 0.8)) drop-shadow(0 0 40px rgba(255, 51, 102, 0.5));
+            }
         }
 
         @keyframes titleShimmer {
@@ -859,16 +912,242 @@
             outline-offset: 2px;
             border-radius: 4px;
         }
+        
+        
+        /* ============================================ */
+        /* FUTURISTIC ABOUT SECTION STYLES */
+        /* ============================================ */
+        #about {
+            position: relative;
+        }
+        
+        #about .max-w-7xl {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ============================================ */
+        /* CUSTOM FUTURISTIC ABOUT CARDS - UNIQUE DESIGN */
+        /* ============================================ */
+        
+        .futuristic-about-card {
+            position: relative;
+            cursor: pointer;
+            opacity: 0;
+            animation: cardSlideIn 0.8s ease-out forwards;
+            perspective: 1000px;
+        }
+        
+        .futuristic-about-card:nth-child(1) { animation-delay: 0.1s; }
+        .futuristic-about-card:nth-child(2) { animation-delay: 0.25s; }
+        .futuristic-about-card:nth-child(3) { animation-delay: 0.4s; }
+        .futuristic-about-card:nth-child(4) { animation-delay: 0.55s; }
+        
+        .card-inner {
+            position: relative;
+            height: 100%;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, rgba(10, 15, 30, 0.8) 0%, rgba(25, 35, 55, 0.4) 100%);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+        
+        /* Animated Border Glow */
+        .card-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem;
+            padding: 1px;
+            background: linear-gradient(45deg, var(--card-color, #d13ce2), rgba(255, 255, 255, 0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .futuristic-about-card:hover .card-inner::before {
+            opacity: 1;
+        }
+        
+        /* Accent Element - Animated Shape in Corner */
+        .card-accent {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: var(--card-color, #d13ce2);
+            opacity: 0.1;
+            border-radius: 50%;
+            filter: blur(30px);
+            animation: floatAccent 6s ease-in-out infinite;
+        }
+        
+        .futuristic-about-card:hover .card-accent {
+            animation: floatAccent 3s ease-in-out infinite;
+        }
+        
+        /* Icon Styling - Unique Layout */
+        .card-icon {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(var(--card-rgb, 209, 60, 226), 0.2) 0%, rgba(var(--card-rgb, 209, 60, 226), 0.05) 100%);
+            border: 2px solid var(--card-color, #d13ce2);
+            border-radius: 1rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .card-icon span {
+            font-size: 2.5rem;
+            color: var(--card-color, #d13ce2);
+            text-shadow: 0 0 20px var(--card-color, #d13ce2);
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px var(--card-color, #d13ce2));
+        }
+        
+        .futuristic-about-card:hover .card-icon {
+            transform: scale(1.15) rotateZ(10deg);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 30px var(--card-color, #d13ce2), inset 0 0 20px rgba(var(--card-rgb, 209, 60, 226), 0.1);
+        }
+        
+        .futuristic-about-card:hover .card-icon span {
+            transform: rotateY(360deg) scale(1.2);
+            text-shadow: 0 0 40px var(--card-color, #d13ce2);
+        }
+        
+        /* Text Content */
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+        
+        .card-content p {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.7);
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+        
+        .futuristic-about-card:hover .card-content h3 {
+            color: var(--card-color, #d13ce2);
+            text-shadow: 0 0 15px var(--card-color, #d13ce2);
+        }
+        
+        .futuristic-about-card:hover .card-content p {
+            color: rgba(226, 232, 240, 1);
+        }
+        
+        /* Hover State - Full Card Animation */
+        .futuristic-about-card:hover .card-inner {
+            transform: translateY(-10px) perspective(1000px) rotateX(5deg);
+            border-color: var(--card-color, #d13ce2);
+            box-shadow: 0 30px 60px rgba(var(--card-rgb, 209, 60, 226), 0.3), 
+                        0 0 40px rgba(var(--card-rgb, 209, 60, 226), 0.2);
+        }
+        
+        .futuristic-about-card:active .card-inner {
+            transform: translateY(-5px) scale(0.98);
+        }
+        
+        /* Animations */
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) rotateX(-20deg) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0) scale(1);
+            }
+        }
+        
+        @keyframes floatAccent {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(20px, -20px);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .glitch-text-about {
+            position: relative;
+        }
+        
+        .glitch-text-about:hover {
+            animation: glitch 0.3s infinite;
+        }
+        
+        .about-paragraph {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .about-paragraph:hover {
+            color: #d13ce2;
+            text-shadow: 0 0 20px rgba(209, 60, 226, 0.5);
+            transform: perspective(800px) rotateX(2deg);
+        }
+        
+        @keyframes glitch {
+            0% {
+                text-shadow: -2px 0 #ff3366, 2px 0 #2df0ac;
+            }
+            25% {
+                text-shadow: 2px 0 #ff3366, -2px 0 #2df0ac;
+            }
+            50% {
+                text-shadow: -2px 0 #d13ce2, 2px 0 #ff3366;
+            }
+            100% {
+                text-shadow: 2px 0 #2df0ac, -2px 0 #d13ce2;
+            }
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white">
 <!-- Navigation Bar -->
 <nav class="fixed top-0 w-full z-50 glass-nav">
 <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-2xl">neurology</span>
-</div>
+<div class="flex items-center gap-2">
 <span class="text-xl font-bold tracking-tight portfolio-title" data-text="PUSHPENDRA's PORTFOLIO">PUSHPENDRA's PORTFOLIO</span>
 </div>
 <div class="hidden md:flex items-center gap-8 nav-animated">
@@ -982,44 +1261,79 @@
 </div>
 </section>
 <!-- About Section -->
-<section class="py-24 bg-white dark:bg-background-dark" id="about">
-<div class="max-w-7xl mx-auto px-6">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-<div class="lg:col-span-5">
-<h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-<span class="w-8 h-1 bg-primary inline-block"></span>
-                        About Me
-                    </h2>
-<p class="text-slate-400 text-lg leading-relaxed mb-6">
-                        I am currently pursuing my Master of Computer Applications (MCA), where I've dedicated my research to the intersection of big data and neural architecture. My journey started with a fascination for how machines can learn patterns from raw data, which evolved into a professional pursuit of AI and Machine Learning.
-                    </p>
-<p class="text-slate-400 text-lg leading-relaxed">
-                        Beyond the code, I am a constant learner, following the latest research papers in NLP and Computer Vision to stay at the cutting edge of the field. My goal is to develop ethical AI solutions that solve complex human problems.
-                    </p>
-</div>
-<div class="lg:col-span-7 grid grid-cols-2 gap-6">
-<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-<span class="material-symbols-outlined text-primary mb-4 text-3xl">school</span>
-<h3 class="font-bold text-xl mb-2">Education</h3>
-<p class="text-slate-400 text-sm">MCA Student specializing in AI/ML</p>
-</div>
-<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-<span class="material-symbols-outlined text-primary mb-4 text-3xl">code</span>
-<h3 class="font-bold text-xl mb-2">Development</h3>
-<p class="text-slate-400 text-sm">Full-stack capabilities with a focus on Python ecosystems.</p>
-</div>
-<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-<span class="material-symbols-outlined text-primary mb-4 text-3xl">database</span>
-<h3 class="font-bold text-xl mb-2">Data Science</h3>
-<p class="text-slate-400 text-sm">Experienced in statistical modeling and ETL pipelines.</p>
-</div>
-<div class="p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-<span class="material-symbols-outlined text-primary mb-4 text-3xl">rocket_launch</span>
-<h3 class="font-bold text-xl mb-2">Innovation</h3>
-<p class="text-slate-400 text-sm">Passionate about R&amp;D in Generative AI models.</p>
-</div>
-</div>
-</div>
+<section class="py-24 bg-white dark:bg-background-dark relative overflow-hidden" id="about">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-30 dark:opacity-10">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-72 h-72 bg-primary1 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div class="lg:col-span-5">
+                <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="w-8 h-1 bg-primary inline-block"></span>
+                    About Me
+                </h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-6">
+                    I am currently pursuing my Master of Computer Applications (MCA), where I've dedicated my research to the intersection of big data and neural architecture. My journey started with a fascination for how machines can learn patterns from raw data, which evolved into a professional pursuit of AI and Machine Learning.
+                </p>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    Beyond the code, I am a constant learner, following the latest research papers in NLP and Computer Vision to stay at the cutting edge of the field. My goal is to develop ethical AI solutions that solve complex human problems.
+                </p>
+            </div>
+            <div class="lg:col-span-7 grid grid-cols-2 gap-6">
+                <div class="futuristic-about-card" data-card-color="#ff3366">
+                    <div class="card-inner">
+                        <div class="card-icon">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Education</h3>
+                            <p>MCA Student specializing in AI/ML</p>
+                        </div>
+                        <div class="card-accent"></div>
+                    </div>
+                </div>
+                <div class="futuristic-about-card" data-card-color="#2df0ac">
+                    <div class="card-inner">
+                        <div class="card-icon">
+                            <span class="material-symbols-outlined">code</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Development</h3>
+                            <p>Full-stack capabilities with a focus on Python ecosystems.</p>
+                        </div>
+                        <div class="card-accent"></div>
+                    </div>
+                </div>
+                <div class="futuristic-about-card" data-card-color="#d13ce2">
+                    <div class="card-inner">
+                        <div class="card-icon">
+                            <span class="material-symbols-outlined">database</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Data Science</h3>
+                            <p>Experienced in statistical modeling and ETL pipelines.</p>
+                        </div>
+                        <div class="card-accent"></div>
+                    </div>
+                </div>
+                <div class="futuristic-about-card" data-card-color="#4faece">
+                    <div class="card-inner">
+                        <div class="card-icon">
+                            <span class="material-symbols-outlined">rocket_launch</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Innovation</h3>
+                            <p>Passionate about R&amp;D in Generative AI models.</p>
+                        </div>
+                        <div class="card-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- Education Section -->
 <section class="py-16 bg-gradient-to-b from-background-dark via-slate-900/30 to-background-dark" id="education">
@@ -1536,71 +1850,146 @@ Certifications & Credentials
 </div>
 </section>
 
-<!-- Contact Section -->
-<section class="py-24" id="contact">
-<div class="max-w-7xl mx-auto px-6">
-<div class="bg-gradient-to-br from-slate-900 to-black rounded-3xl border border-slate-800 p-8 md:p-16 flex flex-col md:flex-row gap-16 overflow-hidden relative">
-<div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
-<div class="flex-1 z-10">
-<h2 class="text-4xl font-bold mb-6">Let's build the future together.</h2>
-<p class="text-slate-400 text-lg mb-8 max-w-md">
-                        Currently looking for internship opportunities or collaborative AI research projects. If you're interested in my work, let's connect.
-                    </p>
-<div class="space-y-4">
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-slate-800 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">mail</span>
-</div>
-<div>
-<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Email Me</p>
-<p class="font-medium"><p class="font-medium hover:text-primary transition-colors">
-    <a href="mailto:Sachanpushpendra03@gmail.com">Sachanpushpendra03@gmail.com</a>
-</p></p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-slate-800 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">share</span>
-</div>
-<div>
-<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Follow Me</p>
-<div class="flex gap-4 mt-1">
-<a class="hover:text-primary transition-colors" href="#">GitHub</a>
-<a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+<!-- Contact Section - FUTURISTIC -->
+<section class="py-4 relative overflow-hidden" id="contact">
+    <!-- Animated background -->
+    <div class="absolute inset-0 opacity-40">
+        <div class="absolute top-0 left-20 w-96 h-96 bg-primary/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 right-20 w-96 h-96 bg-primary1/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-primary2/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
+    </div>
 
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="flex-1 z-10">
-<form action="/send_message" method="POST" class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 space-y-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="space-y-2">
-            <label class="text-xs font-bold uppercase text-slate-400">Name</label>
-            <input name="name" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="e.g. Pushpendra Sachan" type="text" required/>
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h2 class="text-3xl md:text-4xl font-black mb-2 bg-gradient-to-r from-primary1 via-primary to-primary2 bg-clip-text text-transparent" style="text-shadow: 0 0 20px rgba(209, 60, 226, 0.5), 0 0 40px rgba(255, 51, 102, 0.3);
+            animation: textGlowFuturistic 3s ease-in-out infinite;">
+                Let's Create Magic✨
+            </h2>
+            <p class="text-sm text-primary2 max-w-2xl mx-auto leading-relaxed font-semibold tracking-wide">
+                Got an exciting project? Let's collaborate! 🚀
+            </p>
         </div>
-        <div class="space-y-2">
-            <label class="text-xs font-bold uppercase text-slate-400">Email</label>
-            <input name="email" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="......@Email.com" type="email" required/>
-        </div>
-    </div>
-    <div class="space-y-2">
-        <label class="text-xs font-bold uppercase text-slate-400">Subject</label>
-        <input name="subject" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="Opportunity for Collaboration" type="text" required/>
-    </div>
-    <div class="space-y-2">
-        <label class="text-xs font-bold uppercase text-slate-400">Message</label>
-        <textarea name="message" class="w-full bg-slate-900 border-slate-700 rounded-lg text-white ..." placeholder="How can I help you?" rows="4" required></textarea>
-    </div>
-    <button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl transition-all" type="submit">
-        Send Message
-    </button>
-</form>
 
-</div>
-</div>
-</div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- Left Side - Contact Info -->
+            <div class="space-y-4">
+                <!-- Animated Card 1 -->
+                <div class="group relative p-4 rounded-xl border-2 border-primary1/60 bg-gradient-to-br from-slate-900/80 to-black/50 backdrop-blur-xl hover:border-primary1 transition-all duration-500 cursor-pointer transform hover:scale-105 hover:shadow-2xl hover:shadow-primary1/60" style="background: linear-gradient(135deg, rgba(255, 51, 102, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary1/30 to-primary/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary1 to-primary flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-primary1/70">
+                            <span class="material-symbols-outlined text-xl text-white">mail</span>
+                        </div>
+                        <p class="text-xs text-primary1 uppercase font-black tracking-wider mb-1" style="text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);">📧 Email</p>
+                        <a href="mailto:Sachanpushpendra03@gmail.com" class="text-lg font-bold text-white hover:text-primary1 transition-all duration-300 group-hover:text-primary1" style="text-shadow: 0 0 10px rgba(255, 51, 102, 0.4);">
+                            Sachanpushpendra03@gmail.com
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Animated Card 2 -->
+                <div class="group relative p-4 rounded-xl border-2 border-primary2/60 bg-gradient-to-br from-slate-900/80 to-black/50 backdrop-blur-xl hover:border-primary2 transition-all duration-500 cursor-pointer transform hover:scale-105 hover:shadow-2xl hover:shadow-primary2/60" style="background: linear-gradient(135deg, rgba(45, 240, 172, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary2/30 to-primary/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary2 to-primary flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-primary2/70">
+                            <span class="material-symbols-outlined text-xl text-white">phone</span>
+                        </div>
+                        <p class="text-xs text-primary2 uppercase font-black tracking-wider mb-1" style="text-shadow: 0 0 10px rgba(45, 240, 172, 0.6);">📱 Phone</p>
+                        <a href="tel:+916388098635" class="text-lg font-bold text-white hover:text-primary2 transition-all duration-300 group-hover:text-primary2" style="text-shadow: 0 0 10px rgba(45, 240, 172, 0.4);">
+                            +91 6388098635
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Animated Card 3 -->
+                <div class="group relative p-4 rounded-xl border-2 border-primary/60 bg-gradient-to-br from-slate-900/80 to-black/50 backdrop-blur-xl hover:border-primary transition-all duration-500 cursor-pointer transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/60" style="background: linear-gradient(135deg, rgba(209, 60, 226, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary1/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary via-primary1 to-primary2 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-primary/70">
+                            <span class="material-symbols-outlined text-xl text-white">location_on</span>
+                        </div>
+                        <p class="text-xs text-primary uppercase font-black tracking-wider mb-1" style="text-shadow: 0 0 10px rgba(209, 60, 226, 0.6);">📍 Location</p>
+                        <p class="text-lg font-bold text-white" style="text-shadow: 0 0 10px rgba(209, 60, 226, 0.4);">
+                            Delhi, India 🇮🇳
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Contact Form -->
+            <div class="relative">
+                <!-- Glowing Border Effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary1 via-primary to-primary2 rounded-3xl blur-lg opacity-40 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+                
+                <form action="/send_message" method="POST" class="relative bg-gradient-to-br from-slate-900/95 to-black/95 backdrop-blur-2xl p-5 rounded-2xl border-2 border-primary/40 space-y-3 shadow-2xl">
+                    <h3 class="text-xl font-bold bg-gradient-to-r from-primary1 to-primary bg-clip-text text-transparent mb-4" style="text-shadow: 0 0 15px rgba(209, 60, 226, 0.5);">
+                        💬 Send a Message
+                    </h3>
+                    
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold uppercase text-primary1 tracking-wide block" style="text-shadow: 0 0 8px rgba(255, 51, 102, 0.5);">Full Name</label>
+                        <input name="name" 
+                            class="w-full px-4 py-2 bg-slate-800/50 border-2 border-slate-700/50 rounded-lg text-white text-sm placeholder-slate-400 transition-all duration-300 focus:border-primary focus:bg-slate-800 focus:ring-2 focus:ring-primary/20 focus:outline-none hover:border-primary/50" 
+                            placeholder="Your Name" 
+                            type="text" 
+                            required/>
+                    </div>
+                    
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold uppercase text-primary2 tracking-wide block" style="text-shadow: 0 0 8px rgba(45, 240, 172, 0.5);">Email Address</label>
+                        <input name="email" 
+                            class="w-full px-4 py-2 bg-slate-800/50 border-2 border-slate-700/50 rounded-lg text-white text-sm placeholder-slate-400 transition-all duration-300 focus:border-primary2 focus:bg-slate-800 focus:ring-2 focus:ring-primary2/20 focus:outline-none hover:border-primary2/50" 
+                            placeholder="your@email.com" 
+                            type="email" 
+                            required/>
+                    </div>
+                    
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold uppercase text-primary tracking-wide block" style="text-shadow: 0 0 8px rgba(209, 60, 226, 0.5);">Subject</label>
+                        <input name="subject" 
+                            class="w-full px-4 py-2 bg-slate-800/50 border-2 border-slate-700/50 rounded-lg text-white text-sm placeholder-slate-400 transition-all duration-300 focus:border-primary focus:bg-slate-800 focus:ring-2 focus:ring-primary/20 focus:outline-none hover:border-primary/50" 
+                            placeholder="Project Collaboration..." 
+                            type="text" 
+                            required/>
+                    </div>
+                    
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold uppercase text-primary1 tracking-wide block" style="text-shadow: 0 0 8px rgba(255, 51, 102, 0.5);">Your Message</label>
+                        <textarea name="message" 
+                            class="w-full px-4 py-2 bg-slate-800/50 border-2 border-slate-700/50 rounded-lg text-white text-sm placeholder-slate-400 transition-all duration-300 focus:border-primary1 focus:bg-slate-800 focus:ring-2 focus:ring-primary1/20 focus:outline-none hover:border-primary1/50 resize-none" 
+                            placeholder="Tell me your idea..." 
+                            rows="3" 
+                            required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full relative group mt-3">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary1 to-primary blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                        <div class="relative px-6 py-3 bg-gradient-to-r from-primary1 to-primary text-white font-bold text-sm rounded-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl uppercase tracking-wide flex items-center justify-center gap-2" style="text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
+                            <span>Send</span>
+                            <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">send</span>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Social Links Bottom -->
+        <div class="mt-5 pt-5 border-t border-slate-800/50">
+            <p class="text-center text-slate-400 text-xs mb-3 uppercase font-bold tracking-widest">Connect with me on</p>
+            <div class="flex justify-center gap-4">
+                <a href="https://github.com/Pushpendera5" target="_blank" rel="noopener noreferrer" class="group relative w-12 h-12 rounded-full bg-gradient-to-br from-primary1/20 to-primary1/5 border-2 border-primary1/50 flex items-center justify-center hover:border-primary1 hover:bg-primary1/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary1/50" title="GitHub">
+                    <span class="material-symbols-outlined text-primary1">code</span>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="group relative w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/50 flex items-center justify-center hover:border-primary hover:bg-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/50" title="LinkedIn">
+                    <span class="material-symbols-outlined text-primary">work</span>
+                </a>
+                <a href="mailto:Sachanpushpendra03@gmail.com" class="group relative w-12 h-12 rounded-full bg-gradient-to-br from-primary2/20 to-primary2/5 border-2 border-primary2/50 flex items-center justify-center hover:border-primary2 hover:bg-primary2/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary2/50" title="Email">
+                    <span class="material-symbols-outlined text-primary2">mail</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- Footer -->
 <footer class="py-12 border-t border-slate-800 bg-background-dark">
@@ -1620,57 +2009,6 @@ Certifications & Credentials
 </div>
 </div>
 </footer>
-
-<!-- We wrap everything in a fixed container for draggability -->
-<div class="fixed bottom-10 right-10 z-50 flex flex-col items-end" id="chatbot-wrapper">
-<!-- BEGIN: Chat Window -->
-<div class="hidden w-80 h-[500px] mb-4 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-slide-up" id="chat-window">
-<!-- Header -->
-<div class="bg-brand-blue p-4 flex items-center justify-between text-white">
-<div class="flex items-center gap-2">
-<div class="w-8 h-2 bg-green-400 rounded-full animate-pulse"></div>
-<span class="font-semibold"> PUSHPENDRA'S AI Assistant</span>
-</div>
-<button class="hover:bg-blue-600 rounded p-1 transition-colors" id="close-chat">
-<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-<!-- Messages Area -->
-<div class="h-80 p-4 overflow-y-auto chat-scrollbar flex flex-col gap-3 bg-slate-900" id="chat-messages">
-<!-- Bot Message -->
-<div class="flex flex-col">
-<div class="bg-brand-dark-surface text-slate-200 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl text-sm max-w-[85%] border border-slate-700">
-            Hello! I'm your AI assistant. How can I help you with my portfolio or experience today?
-          </div>
-<span class="text-[10px] text-slate-500 mt-1 ml-1">Just now</span>
-</div>
-</div>
-<!-- Input Area -->
-<div class="p-3 border-t border-slate-700 bg-brand-dark">
-<div class="relative">
-<input class="w-full bg-slate-500 border-slate-200 text-white rounded-full py-2 px-4 text-sm focus:ring-brand-blue focus:border-brand-blue placeholder-slate-500" id="chat-input" placeholder="Ask me something..." type="text"/>
-<button class="absolute right-2 top-1/2 -translate-y-1/2 text-brand-blue hover:text-blue-400 p-1" id="send-btn">
-<svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-</svg>
-</button>
-</div>
-</div>
-</div>
-<!-- END: Chat Window -->
-<!-- BEGIN: Trigger Button -->
-<button class="group flex items-center gap-3 bg-brand-blue hover:bg-brand-blue-light text-white px-6 py-3 rounded-full shadow-lg shadow-blue-900/40 transition-all active:scale-95 cursor-grab active:cursor-grabbing" data-purpose="chatbot-toggle" id="chat-trigger">
-<div class="relative">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<span class="font-bold uppercase tracking-wider text-sm">Ask Me</span>
-</button>
-<!-- END: Trigger Button -->
-</div>
 
 <!-- BEGIN: JavaScript Logic -->
 <script data-purpose="sound-effects">
@@ -1700,93 +2038,121 @@ Certifications & Credentials
     };
   </script>
 <script data-purpose="chat-interactivity">
-    const wrapper = document.getElementById('chatbot-wrapper');
-    const trigger = document.getElementById('chat-trigger');
-    const chatWindow = document.getElementById('chat-window');
-    const closeBtn = document.getElementById('close-chat');
-    const chatInput = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
-    const messagesContainer = document.getElementById('chat-messages');
-
-    let isDragging = false;
-    let startX, startY, initialX, initialY;
-
-    // Toggle Chat Window
-    const toggleChat = (e) => {
-      // Don't toggle if we were just dragging
-      if (isDragging) return;
-      
-      const isHidden = chatWindow.classList.contains('hidden');
-      chatWindow.classList.toggle('hidden');
-      
-      if (isHidden) {
-        playSound(660, 'sine', 0.1); // Open sound
-        chatInput.focus();
-      } else {
-        playSound(440, 'sine', 0.1); // Close sound
-      }
-    };
-
-    trigger.addEventListener('click', toggleChat);
-    closeBtn.addEventListener('click', () => {
-      chatWindow.classList.add('hidden');
-      playSound(440, 'sine', 0.1);
-    });
-
-    // Draggable Logic
-    trigger.addEventListener('mousedown', (e) => {
-      isDragging = false; // Reset drag state on new click
-      startX = e.clientX;
-      startY = e.clientY;
-      
-      const rect = wrapper.getBoundingClientRect();
-      initialX = rect.left;
-      initialY = rect.top;
-
-      const onMouseMove = (moveEvent) => {
-        const dx = moveEvent.clientX - startX;
-        const dy = moveEvent.clientY - startY;
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+        const wrapper = document.getElementById('chatbot-wrapper');
+        const trigger = document.getElementById('chat-trigger');
+        const chatWindow = document.getElementById('chat-window');
+        const closeBtn = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const messagesContainer = document.getElementById('chat-messages');
         
-        // If moved more than 5px, consider it a drag
-        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-          isDragging = true;
-          // Position from top-left instead of bottom-right once dragged
-          wrapper.style.bottom = 'auto';
-          wrapper.style.right = 'auto';
-          wrapper.style.left = (initialX + dx) + 'px';
-          wrapper.style.top = (initialY + dy) + 'px';
+        // Debug: Check if elements exist
+        if (!trigger || !chatWindow) {
+            console.error('Chat elements not found!', { trigger, chatWindow });
+            return;
         }
-      };
+        
+        // Conversation History - Stored in Memory (cleared on page refresh)
+        let conversationHistory = [];
 
-      const onMouseUp = () => {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-      };
+        // Ensure Wrapper is Always Visible and Fixed to Viewport
+        const ensureWrapperVisible = () => {
+            if (wrapper) {
+                // Force fixed positioning to viewport
+                wrapper.style.position = 'fixed';
+                wrapper.style.bottom = '24px';
+                wrapper.style.right = '24px';
+                wrapper.style.zIndex = '9999';
+                // Ensure no transform affects it
+                wrapper.style.transform = 'none';
+                // Make sure it's visible
+                wrapper.style.display = 'flex';
+            }
+        };
 
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-    });
+        // Call on load and every 100ms to ensure it stays fixed
+        ensureWrapperVisible();
+        window.addEventListener('scroll', ensureWrapperVisible);
+        window.addEventListener('resize', ensureWrapperVisible);
+        setInterval(ensureWrapperVisible, 100);
 
-    // Simple Messaging UI Mockup
-    // Replaces the previous addMessage and handleSend logic
+        // Keep-Alive Function - Prevent server/model timeout (ping every 2 minutes)
+        const keepServerAlive = () => {
+            fetch('/keepalive', { method: 'GET' })
+                .then(response => response.json())
+                .catch(err => console.warn("Keep-alive ping failed (no connection):", err));
+        };
+        
+        // Ping server immediately on load, then every 2 minutes
+        keepServerAlive();
+        setInterval(keepServerAlive, 120000); // 2 minutes = 120,000ms
+
+        // Toggle Chat Window
+        const toggleChat = (e) => {
+          const isHidden = chatWindow.classList.contains('hidden');
+          chatWindow.classList.toggle('hidden');
+          
+          if (isHidden) {
+            playSound(660, 'sine', 0.1); // Open sound
+            chatInput.focus();
+          } else {
+            playSound(440, 'sine', 0.1); // Close sound
+          }
+        };
+
+        trigger.addEventListener('click', toggleChat);
+        closeBtn.addEventListener('click', () => {
+          chatWindow.classList.add('hidden');
+          playSound(440, 'sine', 0.1);
+        });
+
+        // Enhanced Messaging with Typing Effect
 const addMessage = (text, isUser = false) => {
     const chatMessages = document.getElementById('chat-messages');
     const msgDiv = document.createElement('div');
-    msgDiv.className = 'flex flex-col ' + (isUser ? 'items-end' : '');
+    msgDiv.className = 'flex ' + (isUser ? 'justify-end' : 'justify-start');
     
     const bubbleClasses = isUser 
-        ? 'bg-brand-blue text-white rounded-tl-xl rounded-bl-xl rounded-br-xl' 
-        : 'bg-brand-dark-surface text-slate-200 rounded-tr-xl rounded-br-xl rounded-bl-xl border border-slate-700';
+        ? 'bg-gradient-to-r from-primary1 to-primary text-white rounded-3xl rounded-tr-none max-w-[80%] shadow-lg shadow-primary/20' 
+        : 'bg-gradient-to-br from-primary/20 to-primary1/20 border border-primary/40 text-slate-100 rounded-3xl rounded-tl-none max-w-[80%] shadow-lg shadow-primary/10 hover:shadow-primary/20';
         
-    msgDiv.innerHTML = `
-        <div class="${bubbleClasses} p-3 text-sm max-w-[85%]">
-          ${text}
-        </div>
-        <span class="text-[10px] text-slate-500 mt-1 mx-1">Just now</span>
-    `;
+    const contentDiv = document.createElement('div');
+    contentDiv.className = bubbleClasses + ' px-5 py-3 text-sm leading-relaxed';
+    contentDiv.textContent = isUser ? text : ''; // User messages show all at once
+    
+    msgDiv.appendChild(contentDiv);
+    
+    const timeDiv = document.createElement('span');
+    timeDiv.className = 'text-[10px] text-slate-500 mt-2 ' + (isUser ? 'mr-2' : 'ml-2') + ' block';
+    timeDiv.textContent = 'Just now';
+    msgDiv.appendChild(timeDiv);
     
     messagesContainer.appendChild(msgDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    
+    // If it's a user message, return immediately
+    if (isUser) return Promise.resolve();
+    
+    // For bot messages, return a promise that types out the text
+    return new Promise((resolve) => {
+        const words = text.split(' ');
+        let currentIndex = 0;
+        
+        const typeNextWord = () => {
+            if (currentIndex < words.length) {
+                contentDiv.textContent += (currentIndex === 0 ? '' : ' ') + words[currentIndex];
+                currentIndex++;
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                setTimeout(typeNextWord, 80); // Delay between words (80ms)
+            } else {
+                resolve();
+            }
+        };
+        
+        typeNextWord();
+    });
 };
 
 const handleSend = async () => {
@@ -1794,16 +2160,36 @@ const handleSend = async () => {
     const val = chatInput.value.trim();
     if (!val) return;
 
-    console.log("Sending message:", val); // For debugging
+    console.log("Sending message:", val);
+    console.log("Current conversation history:", conversationHistory);
+    
+    // Add user message to UI
     addMessage(val, true);
+    
+    // Add user message to conversation history
+    conversationHistory.push({ role: 'user', content: val });
+    
     chatInput.value = '';
+    
+    // Show typing indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'flex justify-start';
+    const typingBubble = document.createElement('div');
+    typingBubble.className = 'bg-gradient-to-br from-primary/20 to-primary1/20 border border-primary/40 px-5 py-3 rounded-3xl rounded-tl-none';
+    typingBubble.innerHTML = '<div class="flex gap-1"><span class="w-2 h-2 bg-primary rounded-full animate-bounce"></span><span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay:0.2s"></span><span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay:0.4s"></span></div>';
+    typingDiv.appendChild(typingBubble);
+    messagesContainer.appendChild(typingDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
     try {
-        // Note: only '/ask' is used here
+        // Send entire conversation history to backend
         const response = await fetch('/ask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: val })
+            body: JSON.stringify({ 
+                message: val,
+                conversation_history: conversationHistory // Send entire conversation
+            })
         });
 
         if (!response.ok) {
@@ -1812,11 +2198,23 @@ const handleSend = async () => {
 
         const data = await response.json();
         console.log("AI Response:", data);
-        addMessage(data.reply, false);
+        console.log("Updated conversation history:", conversationHistory);
+        
+        // Remove typing indicator
+        if (typingDiv.parentNode) messagesContainer.removeChild(typingDiv);
+        
+        // Add bot response to UI with typing effect
+        await addMessage(data.reply, false);
+        
+        // Add bot response to conversation history
+        conversationHistory.push({ role: 'assistant', content: data.reply });
+        console.log("History after AI response:", conversationHistory);
         
     } catch (err) {
         console.error("Fetch Error:", err);
-        addMessage("Error: Connection lost or Route not found!", false);
+        // Remove typing indicator
+        if (typingDiv.parentNode) messagesContainer.removeChild(typingDiv);
+        addMessage("❌ Error: Connection lost or route not found!", false);
     }
 };
 
@@ -1829,6 +2227,8 @@ document.getElementById('chat-input').addEventListener('keypress', function (e) 
         handleSend();
     }
 });
+    }); // End DOMContentLoaded
+
 // Mobile Menu Toggle Logic
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -1848,5 +2248,66 @@ mobileLinks.forEach(link => {
 
 </script>
 <script src="/static/futuristic-portfolio.js"></script>
+<script src="/static/futuristic-about.js"></script>
+
+<!-- AI Assistant Chatbot -->
+<div id="chatbot-wrapper" style="position: fixed !important; bottom: 24px !important; right: 24px !important; top: auto !important; left: auto !important; z-index: 9999 !important; display: flex !important; flex-direction: column !important; align-items: flex-end !important; pointer-events: auto !important; margin: 0 !important; padding: 0 !important; width: auto !important; height: auto !important; transform: none !important;">
+    <!-- Chat Window -->
+    <div class="hidden w-96 h-[600px] mb-4 bg-gradient-to-br from-slate-900 via-slate-900 to-black border-2 border-primary/50 rounded-3xl shadow-2xl shadow-primary/25 overflow-hidden flex flex-col animate-slide-up backdrop-blur-xl" id="chat-window">
+        <!-- Header with Gradient -->
+        <div class="bg-gradient-to-r from-primary1 via-primary to-primary2 p-5 flex items-center justify-between text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 mix-blend-overlay" style="background-image: radial-gradient(circle at 20% 50%, #ff3366, transparent), radial-gradient(circle at 80% 80%, #d13ce2, transparent);"></div>
+            <div class="relative z-10 flex items-center gap-3">
+                <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400"></div>
+                <div>
+                    <span class="font-black text-lg tracking-wider">PUSHPENDRA'S</span>
+                    <p class="font-bold text-xs opacity-90">AI Assistant</p>
+                </div>
+            </div>
+            <button class="hover:bg-white/20 rounded-full p-2 transition-all duration-300 hover:scale-110" id="close-chat">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="flex-1 p-5 overflow-y-auto chat-scrollbar flex flex-col gap-4 bg-gradient-to-b from-slate-900/50 to-black/50" id="chat-messages">
+            <!-- Initial Bot Message -->
+            <div class="flex justify-start">
+                <div class="max-w-[80%] group">
+                    <div class="bg-gradient-to-br from-primary/20 to-primary1/20 border border-primary/40 text-slate-100 px-5 py-3 rounded-3xl rounded-tl-none text-sm leading-relaxed shadow-lg shadow-primary/10 hover:shadow-primary/20 transition-all duration-300">
+                        <span class="inline-block">🤖 Hello! I'm Pushpendra's AI Assistant. Ask me anything about his skills, projects, or experience!</span>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-2 ml-2 block">Just now</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="p-4 border-t border-primary/20 bg-gradient-to-b from-slate-800/30 to-black/50 backdrop-blur-xl">
+            <div class="relative flex items-center gap-2">
+                <input class="flex-1 bg-slate-800/60 border-2 border-primary/30 text-white rounded-full py-3 px-5 text-sm focus:border-primary focus:bg-slate-800/80 focus:ring-2 focus:ring-primary/20 focus:outline-none placeholder-slate-500 transition-all duration-300 hover:border-primary/50" id="chat-input" placeholder="Type your question..." type="text"/>
+                <button class="bg-gradient-to-r from-primary1 to-primary text-white hover:shadow-lg hover:shadow-primary/50 p-3 rounded-full transition-all duration-300 hover:scale-110 active:scale-95" id="send-btn" title="Send message">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trigger Button -->
+    <button class="group relative flex items-center gap-3 bg-gradient-to-r from-primary1 via-primary to-primary2 hover:shadow-2xl hover:shadow-primary/60 text-white px-7 py-4 rounded-full shadow-xl transition-all active:scale-95 cursor-pointer font-bold uppercase tracking-widest text-sm" id="chat-trigger">
+        <div class="relative">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400"></span>
+        </div>
+        <span>Ask AI</span>
+        <div class="absolute -inset-1 bg-gradient-to-r from-primary1 via-primary to-primary2 rounded-full blur opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+    </button>
+</div>
 
 </body></html>
