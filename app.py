@@ -190,7 +190,7 @@ LinkedIn: linkedin.com/in/pushpendra-sachan-942095252
 
 PERSONAL INFORMATION:
 - Name: Pushpendra Sachan
-- Age: 22 years old
+- Age: 27 years old
 - Location: Kanpur, Uttar Pradesh, India
 - Email: sachanpushpendra03@gmail.com
 - Phone: +91-6388098635
