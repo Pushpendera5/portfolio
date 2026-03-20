@@ -393,8 +393,21 @@ def ask():
         is_greeting = any(keyword in user_lower for keyword in greeting_keywords)
         
         # Check if asking about Pushpendra (skills, projects, experience, etc)
-        pushpendra_keywords = ['pushpendra', 'your skills', 'your projects', 'your experience', 'your work', 'what do you do', 'portfolio', 'your background', 'who are you', 'what are your skills', 'about you', 'tell me about', 'your expertise']
-        is_asking_about_pushpendra = any(keyword in user_lower for keyword in pushpendra_keywords)
+        # NOTE: "tell me about" alone is too broad (e.g., "tell me about delhi").
+        # It should count as Pushpendra-intent only when combined with self/profile references.
+        pushpendra_keywords = [
+            'pushpendra', 'your skills', 'your projects', 'your experience', 'your work',
+            'what do you do', 'portfolio', 'your background', 'who are you',
+            'what are your skills', 'about you', 'your expertise', 'yourself'
+        ]
+        tell_me_about_self_refs = [
+            'pushpendra', 'you', 'yourself', 'your work', 'your skills',
+            'your projects', 'your experience', 'your background', 'portfolio'
+        ]
+        is_tell_me_about_self = 'tell me about' in user_lower and any(
+            ref in user_lower for ref in tell_me_about_self_refs
+        )
+        is_asking_about_pushpendra = any(keyword in user_lower for keyword in pushpendra_keywords) or is_tell_me_about_self
         
         # Detect if asking about this CHATBOT specifically (developer, creator, builder) - CHECK FIRST PRIORITY
         asking_about_chatbot_creator = any(kw in user_lower for kw in ['who created you', 'who built you', 'your developer', 'your creator', 'who made you', 'who developed you', 'who built this', 'your boss', 'your owner', 'who created this chatbot', 'who is behind this', 'who developed this chatbot', 'who is your boss', 'who is the boss', 'who is my boss', 'my boss', 'your boss', 'boss', 'owner', 'whos your boss', 'whats your boss', 'who made this', 'who developed this', 'who is behind', 'who developed me', 'who is my developer', 'who created me', 'developer', 'creator', 'built me', 'created me', 'made me', 'your creator'])
